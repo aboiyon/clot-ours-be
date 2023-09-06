@@ -2,7 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/Beverages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/Clothes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/Links.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/Tours.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Beverages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Clothes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Links.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Tours.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oBeverages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oClothes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oLinks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oTours.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/models/BeveragesTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/models/ClothesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,13 +30,25 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2V1HF5wH6yGgbtoJulMQQTLau3M" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
