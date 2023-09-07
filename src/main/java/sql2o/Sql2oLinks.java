@@ -1,6 +1,6 @@
 package sql2o;
 
-import dao.Links;
+import dao.LinksInterface;
 
-public class Sql2oLinks implements Links {
+public class Sql2oLinks implements LinksInterface {
 }

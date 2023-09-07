@@ -1,6 +1,6 @@
 package sql2o;
 
-import dao.Clothes;
+import dao.ClothesInterface;
 
-public class Sql2oClothes implements Clothes {
+public class Sql2oClothes implements ClothesInterface {
 }

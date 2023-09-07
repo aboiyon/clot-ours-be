@@ -1,6 +1,6 @@
 package sql2o;
 
-import dao.Tours;
+import dao.ToursInterface;
 
-public class Sql2oTours implements Tours {
+public class Sql2oTours implements ToursInterface {
 }

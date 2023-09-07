@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Tours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Tours.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/models/ToursTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/ToursTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,13 +60,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.ToursTest.checkToursInstantiatesCorrectly">
-    <configuration name="ClothesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.ToursTest.setTourPrice">
+    <configuration name="ToursTest.setTourDescription" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.ClothesTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.setTourDescription&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -87,12 +81,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ClothesTest.setClotheDescriptionCheck" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ToursTest.setTourId" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClotheDescriptionCheck&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.setTourId&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -107,12 +101,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ClothesTest.setClothesImageUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ToursTest.setTourImageUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClothesImageUrl&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.setTourImageUrl&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -127,12 +121,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ClothesTest.setClothesPrice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ToursTest.setTourName" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClothesPrice&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.setTourName&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -147,12 +141,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ToursTest.checkToursInstantiatesCorrectly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ToursTest.setTourPrice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.ToursTest.checkToursInstantiatesCorrectly&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.setTourPrice&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -169,11 +163,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ToursTest.checkToursInstantiatesCorrectly" />
-        <item itemvalue="Gradle.ClothesTest" />
-        <item itemvalue="Gradle.ClothesTest.setClothesPrice" />
-        <item itemvalue="Gradle.ClothesTest.setClothesImageUrl" />
-        <item itemvalue="Gradle.ClothesTest.setClotheDescriptionCheck" />
+        <item itemvalue="Gradle.ToursTest.setTourPrice" />
+        <item itemvalue="Gradle.ToursTest.setTourImageUrl" />
+        <item itemvalue="Gradle.ToursTest.setTourDescription" />
+        <item itemvalue="Gradle.ToursTest.setTourName" />
+        <item itemvalue="Gradle.ToursTest.setTourId" />
       </list>
     </recent_temporary>
   </component>
