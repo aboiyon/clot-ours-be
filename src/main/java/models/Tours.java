@@ -9,8 +9,8 @@ public class Tours {
     private String  imageUrl;
     private int price;
 
-    public Tours(int id, String tourName, String tourDescription, String imageUrl, int price) {
-        this.id = id;
+
+    public Tours(String name, String tourName, String tourDescription, String imageUrl, int price) {
         this.tourName = tourName;
         this.tourDescription = tourDescription;
         this.imageUrl = imageUrl;

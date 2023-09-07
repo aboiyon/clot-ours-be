@@ -7,8 +7,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/models/ClothesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/ClothesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Tours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Tours.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/models/ToursTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/ToursTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,13 +66,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.BeveragesTest">
-    <configuration name="BeveragesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.ToursTest.checkToursInstantiatesCorrectly">
+    <configuration name="ClothesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ClothesTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -87,12 +87,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.beverage_description_set_correctly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ClothesTest.setClotheDescriptionCheck" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.beverage_description_set_correctly&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClotheDescriptionCheck&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -107,12 +107,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.beverage_name_set_correctly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ClothesTest.setClothesImageUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.beverage_name_set_correctly&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClothesImageUrl&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -127,12 +127,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.testSetBeverageId" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ClothesTest.setClothesPrice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.testSetBeverageId&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ClothesTest.setClothesPrice&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -147,12 +147,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.testSetBeverageImageUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ToursTest.checkToursInstantiatesCorrectly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.testSetBeverageImageUrl&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.ToursTest.checkToursInstantiatesCorrectly&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -169,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BeveragesTest" />
-        <item itemvalue="Gradle.BeveragesTest.testSetBeverageId" />
-        <item itemvalue="Gradle.BeveragesTest.testSetBeverageImageUrl" />
-        <item itemvalue="Gradle.BeveragesTest.beverage_description_set_correctly" />
-        <item itemvalue="Gradle.BeveragesTest.beverage_name_set_correctly" />
+        <item itemvalue="Gradle.ToursTest.checkToursInstantiatesCorrectly" />
+        <item itemvalue="Gradle.ClothesTest" />
+        <item itemvalue="Gradle.ClothesTest.setClothesPrice" />
+        <item itemvalue="Gradle.ClothesTest.setClothesImageUrl" />
+        <item itemvalue="Gradle.ClothesTest.setClotheDescriptionCheck" />
       </list>
     </recent_temporary>
   </component>
