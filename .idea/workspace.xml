@@ -6,13 +6,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/models/BeveragesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/BeveragesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/models/ClothesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/ClothesTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +66,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.BeveragesTest.beverage_description_set_correctly">
+  <component name="RunManager" selected="Gradle.BeveragesTest">
     <configuration name="BeveragesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -131,12 +127,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.input_correctly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BeveragesTest.testSetBeverageId" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.input_correctly&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.testSetBeverageId&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -151,12 +147,12 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BeveragesTest.input_correctly_4" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BeveragesTest.testSetBeverageImageUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.input_correctly_4&quot;" />
+        <option name="scriptParameters" value="--tests &quot;models.BeveragesTest.testSetBeverageImageUrl&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -173,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BeveragesTest" />
+        <item itemvalue="Gradle.BeveragesTest.testSetBeverageId" />
+        <item itemvalue="Gradle.BeveragesTest.testSetBeverageImageUrl" />
         <item itemvalue="Gradle.BeveragesTest.beverage_description_set_correctly" />
         <item itemvalue="Gradle.BeveragesTest.beverage_name_set_correctly" />
-        <item itemvalue="Gradle.BeveragesTest.input_correctly" />
-        <item itemvalue="Gradle.BeveragesTest.input_correctly_4" />
-        <item itemvalue="Gradle.BeveragesTest" />
       </list>
     </recent_temporary>
   </component>
