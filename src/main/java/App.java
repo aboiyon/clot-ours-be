@@ -48,13 +48,18 @@ public class App {
             return gson.toJson(beverages.findAll());
         });
 
-//        post("/clothe/new", "application/json", (req, res) -> {
-//            Clothes clothe = gson.fromJson(req.body(), Clothes.class);
-//            clothes.create(clothe);
-//            res.status(201);
-//            res.type("application/json");
-//            return gson.toJson(clothes);
-//        });
+        post("/clothe/new", "application/json", (req, res) -> {
+            Clothes clothe = gson.fromJson(req.body(), Clothes.class);
+            clothes.create(clothe);
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(clothes);
+        });
+
+        get("/clothe", "application/json", (req, res) -> {
+            res.type("application/json");
+            return gson.toJson(clothes.findAll());
+        });
     }
 
 }
