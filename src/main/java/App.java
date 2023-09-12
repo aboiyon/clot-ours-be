@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import models.Beverages;
 import models.Clothes;
+import models.Tours;
 import org.sql2o.Sql2o;
 import sql2o.Sql2oBeverages;
 import sql2o.Sql2oClothes;
@@ -59,6 +60,19 @@ public class App {
         get("/clothe", "application/json", (req, res) -> {
             res.type("application/json");
             return gson.toJson(clothes.findAll());
+        });
+
+        post("/tour/new", "application/json", (req, res) -> {
+            Tours tour = gson.fromJson(req.body(), Tours.class);
+            tours.create(tour);
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(tours);
+        });
+
+        get("/tour", "application/json", (req, res) -> {
+            res.type("application/json");
+            return gson.toJson(tours.findAll());
         });
     }
 
