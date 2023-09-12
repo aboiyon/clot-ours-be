@@ -20,5 +20,6 @@ dependencies {
     implementation "com.sparkjava:spark-template-handlebars:2.5.5"
     implementation 'org.slf4j:slf4j-simple:1.7.21'
     implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'org.sql2o:sql2o:1.5.4'
 
 }
