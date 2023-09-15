@@ -5,7 +5,7 @@ import models.Clothes;
 
 import java.util.List;
 
-public class Sql2oClothes implements ClothesInterface {
+public class Sql2oClotheDao implements ClothesInterface {
     @Override
     public void create(Clothes clothes) {
 

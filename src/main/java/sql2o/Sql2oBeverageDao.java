@@ -5,7 +5,7 @@ import models.Beverages;
 
 import java.util.List;
 
-public class Sql2oBeveragesDao implements BeveragesInterface {
+public class Sql2oBeverageDao implements BeveragesInterface {
     @Override
     public void create(Beverages beverages) {
 

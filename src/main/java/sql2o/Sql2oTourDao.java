@@ -5,7 +5,7 @@ import models.Tours;
 
 import java.util.List;
 
-public class Sql2oTours implements ToursInterface {
+public class Sql2oTourDao implements ToursInterface {
     @Override
     public void create(Tours tours) {
 

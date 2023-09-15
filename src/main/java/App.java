@@ -3,10 +3,10 @@ import models.Beverages;
 import models.Clothes;
 import models.Tours;
 import org.sql2o.Sql2o;
-import sql2o.Sql2oBeverages;
-import sql2o.Sql2oClothes;
+import sql2o.Sql2oBeverageDao;
+import sql2o.Sql2oClotheDao;
 import sql2o.Sql2oLinks;
-import sql2o.Sql2oTours;
+import sql2o.Sql2oTourDao;
 
 
 import java.sql.Connection;
@@ -16,63 +16,63 @@ import static spark.Spark.post;
 
 public class App {
     public static void main(String[] args) {
-//        get("/hello", (request, response) -> {
-//            response.type("text/html");
-//            return "<html><body><h1>Hello Friend!</h1></body></html>";
-//
-//        });
-        Sql2oBeverages beverages;
-        Sql2oClothes clothes;
+        get("/hello", (request, response) -> {
+            response.type("text/html");
+            return "<html><body><h1>Hello Friend!</h1></body></html>";
+
+        });
+        Sql2oBeverageDao beverageDao;
+        Sql2oClotheDao clotheDao;
         Sql2oLinks links;
-        Sql2oTours tours;
+        Sql2oTourDao tourDao;
         Connection conn;
         Gson gson = new Gson();
 
         String connectionString = "";
         Sql2o  sql2o = new Sql2o(connectionString, "cheruiyot", "");
 
-        beverages = new Sql2oBeverages();
-        clothes = new Sql2oClothes();
+        beverageDao = new Sql2oBeverageDao();
+        clotheDao = new Sql2oClotheDao();
         links = new Sql2oLinks();
-        tours = new Sql2oTours();
+        tourDao = new Sql2oTourDao();
 
-        post("/beverage/new", "application/json", (req, res) -> {
+        post("/beverages/new", "application/json", (req, res) -> {
             Beverages beverage = gson.fromJson(req.body(), Beverages.class);
-            beverages.create(beverage);
+            beverageDao.create(beverage);
             res.status(201);
             res.type("application/json");
-            return gson.toJson(beverages);
+            return gson.toJson(beverageDao);
         });
 
-        get("/beverage", "application/json", (req, res) -> {
+        get("/beverages", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(beverages.findAll());
+            return gson.toJson(beverageDao.findAll());
         });
 
-        post("/clothe/new", "application/json", (req, res) -> {
+        post("/clothes/new", "application/json", (req, res) -> {
             Clothes clothe = gson.fromJson(req.body(), Clothes.class);
-            clothes.create(clothe);
+            clotheDao.create(clothe);
             res.status(201);
             res.type("application/json");
-            return gson.toJson(clothes);
+            return gson.toJson(clotheDao);
         });
 
-        get("/clothe", "application/json", (req, res) -> {
+        get("/clothes", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(clothes.findAll());
+            return gson.toJson(clotheDao.findAll());
         });
 
-        post("/tour/new", "application/json", (req, res) -> {
+        post("/tours/new", "application/json", (req, res) -> {
             Tours tour = gson.fromJson(req.body(), Tours.class);
-            tours.create(tour);
+            tourDao.create(tour);
             res.status(201);
             res.type("application/json");
-            return gson.toJson(tours);
+            return gson.toJson(tourDao);
         });
 
-        get("/tour", "application/json", (req, res) -> {
+        get("/tours", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(tours.findAll());
+            return gson.toJson(tourDao.findAll());
         });
     }
 
