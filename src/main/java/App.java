@@ -31,17 +31,17 @@ public class App {
         String connectionString = "";
         Sql2o  sql2o = new Sql2o(connectionString, "cheruiyot", "");
 
-        beverageDao = new Sql2oBeverageDao();
-        clotheDao = new Sql2oClotheDao();
+        beverageDao = new Sql2oBeverageDao(sql2o);
+        clotheDao = new Sql2oClotheDao(sql2o);
         links = new Sql2oLinks();
-        tourDao = new Sql2oTourDao();
+        tourDao = new Sql2oTourDao(sql2o);
 
         post("/beverages/new", "application/json", (req, res) -> {
             Beverages beverage = gson.fromJson(req.body(), Beverages.class);
             beverageDao.create(beverage);
             res.status(201);
             res.type("application/json");
-            return gson.toJson(beverageDao);
+            return gson.toJson(beverage);
         });
 
         get("/beverages", "application/json", (req, res) -> {

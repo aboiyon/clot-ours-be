@@ -2,10 +2,14 @@ package sql2o;
 
 import dao.BeveragesInterface;
 import models.Beverages;
+import org.sql2o.Sql2o;
 
 import java.util.List;
 
 public class Sql2oBeverageDao implements BeveragesInterface {
+    public Sql2oBeverageDao(Sql2o sql2o) {
+    }
+
     @Override
     public void create(Beverages beverages) {
 
