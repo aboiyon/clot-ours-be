@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Tours {
+public class Tour {
     private int id;
     private String tourName;
     private String tourDescription;
@@ -10,7 +10,7 @@ public class Tours {
     private int price;
 
 
-    public Tours(String name, String tourName, String tourDescription, String imageUrl, int price) {
+    public Tour(String name, String tourName, String tourDescription, String imageUrl, int price) {
         this.tourName = tourName;
         this.tourDescription = tourDescription;
         this.imageUrl = imageUrl;
@@ -60,13 +60,13 @@ public class Tours {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tours)) return false;
-        Tours tours = (Tours) o;
-        return id == tours.id &&
-                price == tours.price &&
-                tourName.equals(tours.tourName) &&
-                tourDescription.equals(tours.tourDescription) &&
-                imageUrl.equals(tours.imageUrl);
+        if (!(o instanceof Tour)) return false;
+        Tour tour = (Tour) o;
+        return id == tour.id &&
+                price == tour.price &&
+                tourName.equals(tour.tourName) &&
+                tourDescription.equals(tour.tourDescription) &&
+                imageUrl.equals(tour.imageUrl);
     }
 
     @Override

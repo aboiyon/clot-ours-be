@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="" />
+    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/sql2o/Sql2OTourTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BeveragesInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BeveragesDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ToursInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ToursDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Tours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Tour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oBeverageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oBeverageDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oTourDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oTourDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/models/ToursTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/models/TourTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sql2o/Sql2oBeveragesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sql2o/Sql2oBeveragesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sql2o/Sql2oToursTest.java" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

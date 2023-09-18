@@ -1,32 +1,32 @@
 package sql2o;
 
-import dao.ToursInterface;
-import models.Tours;
+import dao.ToursDao;
+import models.Tour;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
-public class Sql2oTourDao implements ToursInterface {
+public class Sql2oTourDao implements ToursDao {
     public Sql2oTourDao(Sql2o sql2o) {
     }
 
     @Override
-    public void create(Tours tours) {
+    public void add(Tour tour) {
 
     }
 
     @Override
-    public List<Tours> findAll() {
+    public List<Tour> getAll() {
         return null;
     }
 
     @Override
-    public Tours findById(int id) {
+    public Tour findById(int id) {
         return null;
     }
 
     @Override
-    public void deleteAll(Tours tours) {
+    public void deleteAll(Tour tour) {
 
     }
 

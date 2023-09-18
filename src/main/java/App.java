@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import models.Beverages;
 import models.Clothes;
-import models.Tours;
+import models.Tour;
 import org.sql2o.Sql2o;
 import sql2o.Sql2oBeverageDao;
 import sql2o.Sql2oClotheDao;
@@ -63,7 +63,7 @@ public class App {
         });
 
         post("/tours/new", "application/json", (req, res) -> {
-            Tours tour = gson.fromJson(req.body(), Tours.class);
+            Tour tour = gson.fromJson(req.body(), Tour.class);
             tourDao.create(tour);
             res.status(201);
             res.type("application/json");

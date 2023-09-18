@@ -4,15 +4,15 @@ import models.Beverages;
 
 import java.util.List;
 
-public interface BeveragesInterface {
+public interface BeveragesDao {
 //    create
-    void create(Beverages beverages);
+    void add(Beverages beverages);
 
 //    read
-    List<Beverages> findAll();
+    List<Beverages> getAll();
     Beverages findById(int id);
 
 //    delete
-    void  deleteAll(Beverages beverages);
     void deleteById(int id);
+    void clearAll();
 }
