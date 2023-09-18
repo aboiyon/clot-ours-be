@@ -12,7 +12,7 @@ import java.sql.Connection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class Sql2oTourTest {
+public class Sql2oTourDaoTest {
     private static Connection conn;
     private static Sql2oTourDao tourDao;
     @Before
