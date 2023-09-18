@@ -3,10 +3,7 @@ import models.Beverages;
 import models.Clothes;
 import models.Tour;
 import org.sql2o.Sql2o;
-import sql2o.Sql2oBeverageDao;
-import sql2o.Sql2oClotheDao;
-import sql2o.Sql2oLinks;
-import sql2o.Sql2oTourDao;
+import sql2o.*;
 
 
 import java.sql.Connection;
@@ -25,6 +22,7 @@ public class App {
         Sql2oClotheDao clotheDao;
         Sql2oLinks links;
         Sql2oTourDao tourDao;
+        Sql2oReviewDao reviewDao;
         Connection conn;
         Gson gson = new Gson();
 
@@ -38,7 +36,7 @@ public class App {
 
         post("/beverages/new", "application/json", (req, res) -> {
             Beverages beverage = gson.fromJson(req.body(), Beverages.class);
-            beverageDao.create(beverage);
+            beverageDao.add(beverage);
             res.status(201);
             res.type("application/json");
             return gson.toJson(beverage);
@@ -46,7 +44,7 @@ public class App {
 
         get("/beverages", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(beverageDao.findAll());
+            return gson.toJson(beverageDao.getAll());
         });
 
         post("/clothes/new", "application/json", (req, res) -> {
@@ -64,7 +62,7 @@ public class App {
 
         post("/tours/new", "application/json", (req, res) -> {
             Tour tour = gson.fromJson(req.body(), Tour.class);
-            tourDao.create(tour);
+            tourDao.add(tour);
             res.status(201);
             res.type("application/json");
             return gson.toJson(tourDao);
@@ -72,7 +70,7 @@ public class App {
 
         get("/tours", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(tourDao.findAll());
+            return gson.toJson(tourDao.getAll());
         });
     }
 

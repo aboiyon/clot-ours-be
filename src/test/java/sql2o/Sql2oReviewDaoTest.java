@@ -1,10 +1,22 @@
 package sql2o;
 
+import models.Review;
 import models.Tour;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.sql2o.Sql2o;
+
+import java.sql.Connection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class Sql2oReviewDaoTest {
     private static Connection conn; //these variables are now static.
     private static Sql2oTourDao tourDao; //these variables are now static.
+    private static Sql2oReviewDao reviewDao; //these variables are now static.
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -12,7 +24,7 @@ public class Sql2oReviewDaoTest {
         Sql2o sql2o = new Sql2o(connectionString, "v", "1234"); //changed user and pass to null for mac users...Linux & windows need strings
         tourDao = new Sql2oTourDao(sql2o);
         reviewDao = new Sql2oReviewDao(sql2o);
-        conn = sql2o.open();
+        conn = (Connection) sql2o.open();
     }
 
     @After
@@ -32,7 +44,7 @@ public class Sql2oReviewDaoTest {
     public void addingReviewSetsId() throws Exception {
         Tour testTour = setupTour();
         tourDao.add(testTour);
-        Review testReview = new Review("Captain Kirk", 3, "foodcoma!",testTour.getId());
+        Review testReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         int originalReviewId = testReview.getId();
         reviewDao.add(testReview);
         assertNotEquals(originalReviewId,testReview.getId());
@@ -76,11 +88,11 @@ public class Sql2oReviewDaoTest {
     public void timeStampIsReturnedCorrectly() throws Exception {
         Tour testTour = setupTour();
         tourDao.add(testTour);
-        Review testReview = new Review("Captain Kirk", 3,"foodcoma!", testTour.getId());
+        Review testReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         reviewDao.add(testReview);
 
-        long creationTime = testReview.getCreatedat();
-        long savedTime = reviewDao.getAll().get(0).getCreatedat();
+        long creationTime = testReview.getCreatedAt();
+        long savedTime = reviewDao.getAll().get(0).getCreatedAt();
         String formattedCreationTime = testReview.getFormattedCreatedAt();
         String formattedSavedTime = reviewDao.getAll().get(0).getFormattedCreatedAt();
         assertEquals(formattedCreationTime,formattedSavedTime);
@@ -91,7 +103,7 @@ public class Sql2oReviewDaoTest {
     public void reviewsAreReturnedInCorrectOrder() throws Exception {
         Tour testTour = setupTour();
         tourDao.add(testTour);
-        Review testReview = new Review("Captain Kirk", 3, "foodcoma!", testTour.getId());
+        Review testReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         reviewDao.add(testReview);
         try {
             Thread.sleep(2000);
@@ -100,7 +112,7 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testSecondReview = new Review("Mr. Spock", 1, "passable", testTour.getId());
+        Review testSecondReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         reviewDao.add(testSecondReview);
 
         try {
@@ -110,7 +122,7 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testThirdReview = new Review("Scotty", 4, "bloody good grub!", testTour.getId());
+        Review testThirdReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         reviewDao.add(testThirdReview);
 
         try {
@@ -120,7 +132,7 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testFourthReview = new Review("Mr. Sulu", 2, "I prefer home cooking", testTour.getId());
+        Review testFourthReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
         reviewDao.add(testFourthReview);
 
         assertEquals(4, reviewDao.getAllReviewsByTour(testTour.getId()).size()); //it is important we verify that the list is the same size.
@@ -130,19 +142,19 @@ public class Sql2oReviewDaoTest {
     //helpers
 
     public Review setupReview() {
-        Review review = new Review("great", 4, "Kim", 555);
+        Review review = new Review("great", "Anet", 5, 1, 4, 22/05/2023, "");
         reviewDao.add(review);
         return review;
     }
 
     public Review setupReviewForTour(Tour tour) {
-        Review review = new Review("great", 4, "Kim", tour.getId());
+        Review review = new Review("great", "Joan", 5, tour.getId(), 2, 22/05/2023, "");
         reviewDao.add(review);
         return review;
     }
 
     public Tour setupTour() {
-        Tour tour = new Tour("Spice Tour", "214 NE Broadway", "http://fishwitch.com", 70);
+        Tour tour = new Tour("Spice Tour", "Spicy", "XXXXXXX", "http:image/url", 70);
         tourDao.add(tour);
         return tour;
     }

@@ -1,5 +1,12 @@
 package models;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 public class ReviewTest {
     @Before
     public void setUp() throws Exception {
@@ -49,16 +56,16 @@ public class ReviewTest {
     }
 
     @Test
-    public void getRestaurantId() {
+    public void getTourId() {
         Review testReview = setupReview();
-        assertEquals(1, testReview.getRestaurantId());
+        assertEquals(1, testReview.getTourId());
     }
 
     @Test
     public void setRestaurantId() {
         Review testReview = setupReview();
-        testReview.setRestaurantId(10);
-        assertNotEquals(1, testReview.getRestaurantId());
+        testReview.setTourId(10);
+        assertNotEquals(1, testReview.getTourId());
     }
 
     @Test

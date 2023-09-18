@@ -1,5 +1,7 @@
 package models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Review implements Comparable<Review>{
@@ -21,13 +23,14 @@ public class Review implements Comparable<Review>{
         setFormattedCreatedAt();
     }
 
+
     @Override
     public int compareTo(Review reviewObject) {
-        if (this.createdat < reviewObject.createdat)
+        if (this.createdAt < reviewObject.createdAt)
         {
             return -1; //this object was made earlier than the second object.
         }
-        else if (this.createdat > reviewObject.createdat){ //this object was made later than the second object
+        else if (this.createdAt > reviewObject.createdAt){ //this object was made later than the second object
             return 1;
         }
         else {
@@ -44,14 +47,14 @@ public class Review implements Comparable<Review>{
     }
 
     public String getFormattedCreatedAt(){
-        Date date = new Date(createdat);
+        Date date = new Date(createdAt);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         return sdf.format(date);
     }
 
     public void setFormattedCreatedAt(){
-        Date date = new Date(this.createdat);
+        Date date = new Date(this.createdAt);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         this.formattedCreatedAt = sdf.format(date);
