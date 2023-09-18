@@ -16,7 +16,7 @@ CREATE TABLE reviews (
  writtenby VARCHAR,
  rating VARCHAR,
  content VARCHAR,
- restaurantid INTEGER,
+ tourid INTEGER,
  createdat BIGINT
 );
 
