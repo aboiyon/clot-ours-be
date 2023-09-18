@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.sql.Connection;
 
-public class Sql2OTourTest {
+public class Sql2oTourTest {
     private static Connection conn;
     private static Sql2oTourDao tourDao;
     @Before
