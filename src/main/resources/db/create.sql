@@ -11,4 +11,13 @@ imageUrl VARCHAR,
 price int
 );
 
+CREATE TABLE reviews (
+ id int SERIAL PRIMARY KEY,
+ writtenby VARCHAR,
+ rating VARCHAR,
+ content VARCHAR,
+ restaurantid INTEGER,
+ createdat BIGINT
+);
+
 CREATE DATABASE utalii_test WITH TEMPLATE utalii;
