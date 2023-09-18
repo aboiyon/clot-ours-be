@@ -2,10 +2,15 @@ package sql2o;
 
 import models.Tour;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.sql2o.Sql2o;
 
 import java.sql.Connection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class Sql2oTourTest {
     private static Connection conn;
@@ -17,7 +22,7 @@ public class Sql2oTourTest {
         tourDao = new Sql2oTourDao(sql2o);
 //        foodtypeDao = new Sql2oFoodtypeDao(sql2o);
 //        reviewDao = new Sql2oReviewDao(sql2o);
-        conn = sql2o.open();        //open connection once before this test file is run
+        conn = (Connection) sql2o.open();        //open connection once before this test file is run
     }
 
     @After
@@ -28,13 +33,13 @@ public class Sql2oTourTest {
 
     @AfterClass     //changed to @AfterClass (run once after all tests in this file completed)
     public static void shutDown() throws Exception{ //changed to static
-        connection.close(); // close connection once after this entire test file is finished
+        conn.close(); // close connection once after this entire test file is finished
         System.out.println("connection closed");
     }
 
     @Test
     public void addingTourSetsId() throws Exception {
-        Tour testTour = setupTour;
+        Tour testTour = setupTour();
         int originaTourId = testTour.getId();
         tourDao.add(testTour);
         assertNotEquals(originaTourId, testTour.getId());
@@ -42,13 +47,13 @@ public class Sql2oTourTest {
 
     @Test
     public void addedToursAreReturnedFromGetAll() throws Exception {
-        Tour testTour = setupTours();
+        Tour testTour = setupTour();
         assertEquals(1, tourDao.getAll().size());
     }
 
     @Test
     public void tourNotReturnEmptyList() throws Exception {
-        asserEquals(0, tourDao.getAll().size());
+        assertEquals(0, tourDao.getAll().size());
     }
 
     @Test
@@ -61,7 +66,7 @@ public class Sql2oTourTest {
     @Test
     public void updateCorrectlyUpdatesAllFields() throws Exception {
         Tour testTour = setupTour();
-        tourDao.update(testTour.getId(), "a", "b", "c", "d");
+        tourDao.update(testTour.getId(), "a", "b", "c", 70);
         Tour foundTour = tourDao.findById(testTour.getId());
         assertEquals("a", foundTour.getTourName());
         assertEquals("b", foundTour.getTourDescription());
@@ -86,7 +91,7 @@ public class Sql2oTourTest {
 
 //    helpers
     public Tour setupTour (){
-        Tour tour = new Tour("","","", "");
+        Tour tour = new Tour("","","", "", 90);
         tourDao .add(tour);
         return tour;
     }
