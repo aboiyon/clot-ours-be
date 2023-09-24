@@ -1,4 +1,4 @@
-SET MODE PostgresQL;
+SET MODE PostgresSQL;
 
 CREATE DATABASE utalii;
 \c utalii;
@@ -11,13 +11,13 @@ imageUrl VARCHAR,
 price int
 );
 
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
  id SERIAL PRIMARY KEY,
- writtenby VARCHAR,
+ writtenBy VARCHAR,
  rating VARCHAR,
- content VARCHAR,z
- tourid INTEGER,
- createdat BIGINT
+ content VARCHAR,
+ tourId INTEGER,
+ createdAt BIGINT
 );
 
 CREATE DATABASE utalii_test WITH TEMPLATE utalii;

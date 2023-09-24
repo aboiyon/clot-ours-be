@@ -16,7 +16,7 @@ public class Sql2oTourDao implements ToursDao {
 
     @Override
     public void add(Tour tour) {
-        String sql = "INSERT INTO tours (name, description, imageUrl, price ) VALUES (:name, :description, :imageUrl, :price)";
+        String sql = "INSERT INTO tours (tourName, tourDescription, imageUrl, price ) VALUES (:tourName, :tourDescription, :imageUrl, :price)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(tour)
@@ -47,11 +47,11 @@ public class Sql2oTourDao implements ToursDao {
 
     @Override
     public void update(int id, String newName, String newDescription, String newImageUrl, double newPrice) {
-        String sql = "UPDATE tours SET (name, description, imageUrl, price) = (:name, :description, :imageUrl, :price ) WHERE id=:id"; //CHECK!!!
+        String sql = "UPDATE tours SET (tourName, tourDescription, imageUrl, price) = (:tourName, :tourDescription, :imageUrl, :price ) WHERE id=:id"; //CHECK!!!
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("name", newName)
-                    .addParameter("description", newDescription)
+                    .addParameter("tourName", newName)
+                    .addParameter("tourDescription", newDescription)
                     .addParameter("imageUrl", newImageUrl)
                     .addParameter("price", newPrice)
                     .addParameter("id", id)
@@ -64,7 +64,7 @@ public class Sql2oTourDao implements ToursDao {
     @Override
     public void deleteById(int id) {
         String sql = "DELETE from tours WHERE id = :id"; //raw sql
-        String deleteJoin = "DELETE from restaurants_foodtypes WHERE restaurantid = :restaurantId";
+        String deleteJoin = "DELETE from tours WHERE tourId = :tourId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)

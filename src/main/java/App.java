@@ -63,12 +63,19 @@ public class App {
             return gson.toJson(clotheDao.findAll());
         });
 
+//        post("/tours/new", "application/json", (req, res) -> {
+//            Tour tour = gson.fromJson(req.body(), Tour.class);
+//            tourDao.add(tour);
+//            res.status(201);
+//            res.type("application/json");
+//            return gson.toJson(tourDao);
+//        });
+
         post("/tours/new", "application/json", (req, res) -> {
             Tour tour = gson.fromJson(req.body(), Tour.class);
             tourDao.add(tour);
             res.status(201);
-            res.type("application/json");
-            return gson.toJson(tourDao);
+            return gson.toJson(tour);
         });
 
         get("/tours", "application/json", (req, res) -> {
