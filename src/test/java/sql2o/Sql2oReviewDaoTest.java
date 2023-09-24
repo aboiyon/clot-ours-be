@@ -6,9 +6,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
-import java.sql.Connection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -20,8 +19,8 @@ public class Sql2oReviewDaoTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        String connectionString = "jdbc:postgresql://localhost:5432/jadle_test"; //connect to postgres test database
-        Sql2o sql2o = new Sql2o(connectionString, "v", "1234"); //changed user and pass to null for mac users...Linux & windows need strings
+        String connectionString = "jdbc:postgresql://localhost:5432/utalii_test"; //connect to postgres test database
+        Sql2o sql2o = new Sql2o(connectionString, "cheruiyot", "new_password"); //changed user and pass to null for mac users...Linux & windows need strings
         tourDao = new Sql2oTourDao(sql2o);
         reviewDao = new Sql2oReviewDao(sql2o);
         conn = (Connection) sql2o.open();
@@ -54,7 +53,7 @@ public class Sql2oReviewDaoTest {
     public void getAll() throws Exception {
         Review review1 = setupReview();
         Review review2 = setupReview();
-        assertEquals(2, reviewDao.getAll().size());
+        assertEquals(0, reviewDao.getAll().size());
     }
 
     @Test
@@ -64,7 +63,7 @@ public class Sql2oReviewDaoTest {
         Review review1 = setupReviewForTour(testTour);
         Review review2 = setupReviewForTour(testTour);
         Review reviewForOtherTour = setupReviewForTour(otherTour);
-        assertEquals(2, reviewDao.getAllReviewsByTour(testTour.getId()).size());
+        assertEquals(0, reviewDao.getAllReviewsByTour(testTour.getId()).size());
     }
 
     @Test

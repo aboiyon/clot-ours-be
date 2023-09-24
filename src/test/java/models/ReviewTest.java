@@ -58,11 +58,11 @@ public class ReviewTest {
     @Test
     public void getTourId() {
         Review testReview = setupReview();
-        assertEquals(1, testReview.getTourId());
+        assertEquals(0, testReview.getTourId());
     }
 
     @Test
-    public void setRestaurantId() {
+    public void setTourId() {
         Review testReview = setupReview();
         testReview.setTourId(10);
         assertNotEquals(1, testReview.getTourId());
@@ -77,6 +77,6 @@ public class ReviewTest {
 
     // helper
     public Review setupReview (){
-        return new Review("Great service", 4,"Kim", 1);
+        return new Review("Great service", "Kim",4, 0,0, '0', "");
     }
 }

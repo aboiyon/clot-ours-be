@@ -20,7 +20,7 @@ public class Review implements Comparable<Review>{
         this.id = id;
         this.tourId = tourId;
         this.createdAt = System.currentTimeMillis();
-        setFormattedCreatedAt();
+        this.formattedCreatedAt = setFormattedCreatedAt();
     }
 
 
@@ -53,11 +53,12 @@ public class Review implements Comparable<Review>{
         return sdf.format(date);
     }
 
-    public void setFormattedCreatedAt(){
+    public String setFormattedCreatedAt(){
         Date date = new Date(this.createdAt);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         this.formattedCreatedAt = sdf.format(date);
+        return datePatternToUse;
     }
 
     public String getContent() {

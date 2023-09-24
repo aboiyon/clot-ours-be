@@ -17,12 +17,12 @@ repositories {
 dependencies {
     testImplementation 'junit:junit:4.12'
     implementation "com.sparkjava:spark-core:2.6.0"
-    implementation "com.sparkjava:spark-template-handlebars:2.5.5"
+//    implementation "com.sparkjava:spark-template-handlebars:2.5.5"
     implementation 'org.slf4j:slf4j-simple:1.7.21'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'org.sql2o:sql2o:1.5.4'
-    // https://mvnrepository.com/artifact/org.postgresql/postgresql
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.2' // ADD ME FOR POSTGRES VERSION 10.x
+//    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
 
 

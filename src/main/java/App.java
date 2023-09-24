@@ -1,23 +1,26 @@
 import com.google.gson.Gson;
+import exceptions.ApiException;
 import models.Beverages;
 import models.Clothes;
 import models.Tour;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import spark.Spark;
 import sql2o.*;
 
 
-import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
-        get("/hello", (request, response) -> {
-            response.type("text/html");
-            return "<html><body><h1>Hello Friend!</h1></body></html>";
-
-        });
+//        get("/hello", (request, response) -> {
+//            response.type("text/html");
+//            return "<html><body><h1>Hello Friend!</h1></body></html>";
+//
+//        });
         Sql2oBeverageDao beverageDao;
         Sql2oClotheDao clotheDao;
         Sql2oLinks links;
@@ -26,8 +29,9 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "";
-        Sql2o  sql2o = new Sql2o(connectionString, "cheruiyot", "");
+        staticFileLocation("/public");
+        String connectionString = "jdbc:postgresql://localhost:5432/utalii";
+        Sql2o  sql2o = new Sql2o(connectionString, "cheruiyot", "new_password");
 
         beverageDao = new Sql2oBeverageDao(sql2o);
         clotheDao = new Sql2oClotheDao(sql2o);
@@ -41,8 +45,7 @@ public class App {
             res.type("application/json");
             return gson.toJson(beverage);
         });
-
-        get("/beverages", "application/json", (req, res) -> {
+        get("/beverages/", "application/json", (req, res) -> {
             res.type("application/json");
             return gson.toJson(beverageDao.getAll());
         });
@@ -69,9 +72,41 @@ public class App {
         });
 
         get("/tours", "application/json", (req, res) -> {
-            res.type("application/json");
-            return gson.toJson(tourDao.getAll());
+            System.out.println(tourDao.getAll());
+
+            if(tourDao.getAll().size() > 0){
+                return gson.toJson(tourDao.getAll());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but no tours are currently listed in the database.\"}";
+            }
         });
+
+        get("/tours/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            int tourId = Integer.parseInt(req.params("id"));
+            Tour tourToFind = tourDao.findById(tourId);
+            if (tourToFind == null){
+                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(tourToFind);
+        });
+
+        //FILTERS
+        exception(ApiException.class, (exception, req, res) -> {
+            ApiException err = exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.getStatusCode());
+            res.body(gson.toJson(jsonMap));
+        });
+
+        after((req, res) ->{
+            res.type("application/json");
+        });
+
     }
 
 }
