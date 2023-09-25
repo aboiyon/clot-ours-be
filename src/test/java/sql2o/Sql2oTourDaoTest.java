@@ -31,8 +31,8 @@ public class Sql2oTourDaoTest {
             conn.close();
         }
         System.out.println("clearing database");
-        tourDao.clearAll(); //clear all restaurants after every test
-        reviewDao.clearAll(); //clear all restaurants after every test
+        tourDao.clearAll(); //clear all tours after every test
+        reviewDao.clearAll(); //clear all tours after every test
     }
 
     @AfterClass     //changed to @AfterClass (run once after all tests in this file completed)
