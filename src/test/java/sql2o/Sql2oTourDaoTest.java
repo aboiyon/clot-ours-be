@@ -61,40 +61,46 @@ public class Sql2oTourDaoTest {
 
     @Test
     public void findByIdReturnsCorrectTour() throws Exception {
+        // Create a tour and store it in the database
         Tour testTour = setupTour();
-        Tour otherTour = setupTour();
-        assertEquals(testTour, tourDao.findById(otherTour.getId()));
+
+        // Retrieve the same tour from the database using its ID
+        Tour retrievedTour = tourDao.findById(testTour.getId());
+
+        // Compare the retrieved tour with the original tour
+        assertEquals(testTour, retrievedTour);
     }
+
 
     @Test
     public void updateCorrectlyUpdatesAllFields() throws Exception {
         Tour testTour = setupTour();
-        tourDao.update(testTour.getId(), "a", "b", "c", 70);
+        tourDao.update(testTour.getId(), "a", "b", "c", 'd');
         Tour foundTour = tourDao.findById(testTour.getId());
         assertEquals("a", foundTour.getTourName());
         assertEquals("b", foundTour.getTourDescription());
         assertEquals("c", foundTour.getImageUrl());
-        assertEquals("d", foundTour.getPrice());
+        assertEquals('d', foundTour.getPrice());
     }
 
     @Test
     public void deleteByIdDeletesCorrectTour() throws Exception {
         Tour tesTour = setupTour();
         tourDao.deleteById(tesTour.getId());
-        assertEquals("", tourDao.getAll().size());
+        assertEquals(0, tourDao.getAll().size());
     }
 
-//    @Test
-//    public void clearAll() throws Exception {
-//        Tour testTour = setupTour();
-//        Tour otherTour = setupTour();
-//        tourDao.clearAll();
-//        assertEquals(0, tourDao.getAll().size());
-//    }
+    @Test
+    public void clearAll() throws Exception {
+        Tour testTour = setupTour();
+        Tour otherTour = setupTour();
+        tourDao.clearAll();
+        assertEquals(0, tourDao.getAll().size());
+    }
 
 //    helpers
     public Tour setupTour (){
-        Tour tour = new Tour("","","", "", 90);
+        Tour tour = new Tour("","","", "", 0);
         tourDao .add(tour);
         return tour;
     }

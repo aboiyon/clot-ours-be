@@ -63,20 +63,16 @@ public class Sql2oTourDao implements ToursDao {
 
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from tours WHERE id = :id"; //raw sql
-        String deleteJoin = "DELETE from tours WHERE tourId = :tourId";
+        String sql = "DELETE FROM tours WHERE id = :id"; // Corrected SQL query
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .executeUpdate();
-            con.createQuery(deleteJoin)
-                    .addParameter("tourId", id)
-                    .executeUpdate();
-
-        } catch (Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }
+
 
     @Override
     public void clearAll() {
