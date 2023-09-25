@@ -14,13 +14,13 @@ import static org.junit.Assert.assertNotEquals;
 public class Sql2oTourDaoTest {
     private static Connection conn;
     private static Sql2oTourDao tourDao;
+    private static Sql2oReviewDao reviewDao;
     @Before
     public void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/utalii_test";  //connect to postgres test database
         Sql2o sql2o = new Sql2o(connectionString, "cheruiyot", "new_password"); //changed user and pass to null
         tourDao = new Sql2oTourDao(sql2o);
-//        foodtypeDao = new Sql2oFoodtypeDao(sql2o);
-//        reviewDao = new Sql2oReviewDao(sql2o);
+        reviewDao = new Sql2oReviewDao(sql2o);
         conn = sql2o.open();        //open connection once before this test file is run
         conn.getJdbcConnection().setAutoCommit(false);
     }
@@ -32,6 +32,7 @@ public class Sql2oTourDaoTest {
         }
         System.out.println("clearing database");
         tourDao.clearAll(); //clear all restaurants after every test
+        reviewDao.clearAll(); //clear all restaurants after every test
     }
 
     @AfterClass     //changed to @AfterClass (run once after all tests in this file completed)
