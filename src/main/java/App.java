@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import exceptions.ApiException;
 import models.Beverages;
 import models.Clothes;
+import models.Review;
 import models.Tour;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -10,6 +11,7 @@ import sql2o.*;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -37,6 +39,7 @@ public class App {
         clotheDao = new Sql2oClotheDao(sql2o);
         links = new Sql2oLinks();
         tourDao = new Sql2oTourDao(sql2o);
+        reviewDao = new Sql2oReviewDao(sql2o);
 
         post("/beverages/new", "application/json", (req, res) -> {
             Beverages beverage = gson.fromJson(req.body(), Beverages.class);
@@ -94,9 +97,46 @@ public class App {
             int tourId = Integer.parseInt(req.params("id"));
             Tour tourToFind = tourDao.findById(tourId);
             if (tourToFind == null){
-                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
             return gson.toJson(tourToFind);
+        });
+
+        post("/tours/:tourId/reviews/new", "application/json", (req, res) -> {
+            int restaurantId = Integer.parseInt(req.params("tourId"));
+            Review review = gson.fromJson(req.body(), Review.class);
+            review.setCreatedAt(); //I am new!
+            review.setFormattedCreatedAt();
+            review.setTourId(restaurantId); //we need to set this separately because it comes from our route, not our JSON input.
+            reviewDao.add(review);
+            res.status(201);
+            return gson.toJson(review);
+        });
+
+        get("/tours/:id/reviews", "application/json", (req, res) -> {
+            int tourId = Integer.parseInt(req.params("id"));
+
+            Tour tourToFind = tourDao.findById(tourId);
+            List<Review> allReviews;
+
+            if (tourToFind == null){
+                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+            }
+
+            allReviews = reviewDao.getAllReviewsByTour(tourId);
+
+            return gson.toJson(allReviews);
+        });
+
+        get("/restaurants/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
+            int tourId = Integer.parseInt(req.params("id"));
+            Tour tourToFind = tourDao.findById(tourId);
+            List<Review> allReviews;
+            if (tourToFind == null){
+                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+            }
+            allReviews = reviewDao.getAllReviewsByTourSortedNewestToOldest(tourId);
+            return gson.toJson(allReviews);
         });
 
         //FILTERS

@@ -87,7 +87,7 @@ public class Sql2oReviewDaoTest {
     public void timeStampIsReturnedCorrectly() throws Exception {
         Tour testTour = setupTour();
         tourDao.add(testTour);
-        Review testReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
+        Review testReview = new Review("Captain Kirk", "Frank", 5, 0, 1, 23/05/2023, "");
         reviewDao.add(testReview);
 
         long creationTime = testReview.getCreatedAt();
@@ -102,7 +102,7 @@ public class Sql2oReviewDaoTest {
     public void reviewsAreReturnedInCorrectOrder() throws Exception {
         Tour testTour = setupTour();
         tourDao.add(testTour);
-        Review testReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
+        Review testReview = new Review("Captain Kirk", "Frank", 5, '0', 1, 23/05/2023, "");
         reviewDao.add(testReview);
         try {
             Thread.sleep(2000);
@@ -111,7 +111,7 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testSecondReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
+        Review testSecondReview = new Review("Captain Kirk", "Frank", 5, '0', 1, 23/05/2023, "");
         reviewDao.add(testSecondReview);
 
         try {
@@ -121,7 +121,7 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testThirdReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
+        Review testThirdReview = new Review("Captain Kirk", "Frank", 5, '0', 1, 23/05/2023, "");
         reviewDao.add(testThirdReview);
 
         try {
@@ -131,23 +131,23 @@ public class Sql2oReviewDaoTest {
             ex.printStackTrace();
         }
 
-        Review testFourthReview = new Review("Captain Kirk", "Frank", 5, testTour.getId(), 1, 23/05/2023, "");
+        Review testFourthReview = new Review("Captain Kirk", "Frank", 5, '0', 1, 23/05/2023, "");
         reviewDao.add(testFourthReview);
 
         assertEquals(4, reviewDao.getAllReviewsByTour(testTour.getId()).size()); //it is important we verify that the list is the same size.
-        assertEquals("I prefer home cooking", reviewDao.getAllReviewsByTourSortedNewestToOldest(testTour.getId()).get(0).getContent());
+        assertEquals(4, reviewDao.getAllReviewsByTourSortedNewestToOldest(testTour.getId()).get(0).getContent());
     }
 
     //helpers
 
     public Review setupReview() {
-        Review review = new Review("great", "Anet", 5, 1, 4, 22/05/2023, "");
+        Review review = new Review("great", "Anet", 5, '0', 4, 22/05/2023, "");
         reviewDao.add(review);
         return review;
     }
 
     public Review setupReviewForTour(Tour tour) {
-        Review review = new Review("great", "Joan", 5, tour.getId(), 2, 22/05/2023, "");
+        Review review = new Review("great", "Joan", 5, '0', 2, 22/05/2023, "");
         reviewDao.add(review);
         return review;
     }

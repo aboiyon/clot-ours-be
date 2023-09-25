@@ -15,7 +15,7 @@ public class Sql2oReviewDao implements ReviewDao {
 
     @Override
     public void add(Review review) {
-        String sql = "INSERT INTO reviews (writtenby, rating, content, restaurantid, createdat) VALUES (:writtenBy, :rating, :content, :restaurantId, :createdat)";
+        String sql = "INSERT INTO reviews (writtenBy, rating, content, tourId, createdAt) VALUES (:writtenBy, :rating, :content, :restaurantId, :createdAt)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(review)
@@ -51,7 +51,7 @@ public class Sql2oReviewDao implements ReviewDao {
         int i = 1;
         for (Review review : unsortedReviews){
             int comparisonResult;
-            if (i == unsortedReviews.size()) { //we need to do some funky business here to avoid an arrayindex exception and handle the last element properly
+            if (i == unsortedReviews.size()) { //we need to do some funky business here to avoid an array index exception and handle the last element properly
                 if (review.compareTo(unsortedReviews.get(i-1)) == -1){
                     sortedReviews.add(0, unsortedReviews.get(i-1));
                 }
