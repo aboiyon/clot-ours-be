@@ -18,11 +18,6 @@ import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
-//        get("/hello", (request, response) -> {
-//            response.type("text/html");
-//            return "<html><body><h1>Hello Friend!</h1></body></html>";
-//
-//        });
         Sql2oBeverageDao beverageDao;
         Sql2oClotheDao clotheDao;
         Sql2oLinks links;
@@ -65,14 +60,6 @@ public class App {
             res.type("application/json");
             return gson.toJson(clotheDao.findAll());
         });
-
-//        post("/tours/new", "application/json", (req, res) -> {
-//            Tour tour = gson.fromJson(req.body(), Tour.class);
-//            tourDao.add(tour);
-//            res.status(201);
-//            res.type("application/json");
-//            return gson.toJson(tourDao);
-//        });
 
         post("/tours/new", "application/json", (req, res) -> {
             Tour tour = gson.fromJson(req.body(), Tour.class);
