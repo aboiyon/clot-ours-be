@@ -10,27 +10,27 @@ public class Review implements Comparable<Review>{
     private int rating;
     private int id;
     private int tourId;
-    private long createdAt;
+    private long createdat;
     private String formattedCreatedAt;
 
-    public Review(String content, String author, int rating, int id, int tourId, long createdAt, String formattedCreatedAt) {
+    public Review(String content, String author, int rating, int id, int tourId, long createdat, String formattedCreatedAt) {
         this.content = content;
         this.author = author;
         this.rating = rating;
         this.id = id;
         this.tourId = tourId;
-        this.createdAt = System.currentTimeMillis();
-        this.formattedCreatedAt = setFormattedCreatedAt();
+        this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt();
     }
 
 
     @Override
     public int compareTo(Review reviewObject) {
-        if (this.createdAt < reviewObject.createdAt)
+        if (this.createdat < reviewObject.createdat)
         {
             return -1; //this object was made earlier than the second object.
         }
-        else if (this.createdAt > reviewObject.createdAt){ //this object was made later than the second object
+        else if (this.createdat > reviewObject.createdat){ //this object was made later than the second object
             return 1;
         }
         else {
@@ -38,23 +38,23 @@ public class Review implements Comparable<Review>{
         }
     }
 
-    public long getCreatedAt(){
-        return createdAt;
+    public long getCreatedat(){
+        return createdat;
     }
 
     public void setCreatedAt() {
-        this.createdAt = System.currentTimeMillis();
+        this.createdat = System.currentTimeMillis();
     }
 
     public String getFormattedCreatedAt(){
-        Date date = new Date(createdAt);
+        Date date = new Date(createdat);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         return sdf.format(date);
     }
 
     public String setFormattedCreatedAt(){
-        Date date = new Date(this.createdAt);
+        Date date = new Date(this.createdat);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         this.formattedCreatedAt = sdf.format(date);
@@ -101,14 +101,6 @@ public class Review implements Comparable<Review>{
         this.tourId = tourId;
     }
 
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setFormattedCreatedAt(String formattedCreatedAt) {
-        this.formattedCreatedAt = formattedCreatedAt;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,7 +109,7 @@ public class Review implements Comparable<Review>{
         return rating == review.rating &&
                 id == review.id &&
                 tourId == review.tourId &&
-                createdAt == review.createdAt &&
+                createdat == review.createdat &&
                 Objects.equals(content, review.content) &&
                 Objects.equals(author, review.author) &&
                 Objects.equals(formattedCreatedAt, review.formattedCreatedAt);
@@ -125,6 +117,6 @@ public class Review implements Comparable<Review>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, author, rating, id, tourId, createdAt, formattedCreatedAt);
+        return Objects.hash(content, author, rating, id, tourId, createdat, formattedCreatedAt);
     }
 }
