@@ -6,9 +6,7 @@ import models.Review;
 import models.Tour;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-import spark.Spark;
 import sql2o.*;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,11 +88,11 @@ public class App {
         });
 
         post("/tours/:tourId/reviews/new", "application/json", (req, res) -> {
-            int restaurantId = Integer.parseInt(req.params("tourId"));
+            int tourId = Integer.parseInt(req.params("tourId"));
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedAt(); //I am new!
             review.setFormattedCreatedAt();
-            review.setTourId(restaurantId); //we need to set this separately because it comes from our route, not our JSON input.
+            review.setTourId(tourId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewDao.add(review);
             res.status(201);
             return gson.toJson(review);
@@ -115,7 +113,7 @@ public class App {
             return gson.toJson(allReviews);
         });
 
-        get("/restaurants/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
+        get("/tours/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
             int tourId = Integer.parseInt(req.params("id"));
             Tour tourToFind = tourDao.findById(tourId);
             List<Review> allReviews;
