@@ -1,6 +1,6 @@
 package dao;
 
-public interface UserService {
+public interface UserServiceDao {
     public void addUser();
     public void getUser();
     public void addAllUsers();
