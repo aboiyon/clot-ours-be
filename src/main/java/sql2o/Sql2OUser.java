@@ -1,8 +1,8 @@
 package sql2o;
 
-import dao.UserServiceDao;
+import dao.UserService;
 
-public class Sql2oUserDao implements UserServiceDao {
+public class Sql2OUser implements UserService {
 
     @Override
     public void addUser() {
