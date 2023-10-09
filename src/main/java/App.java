@@ -6,9 +6,7 @@ import models.Review;
 import models.Tour;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-import spark.Spark;
 import sql2o.*;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +16,6 @@ import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
-//        get("/hello", (request, response) -> {
-//            response.type("text/html");
-//            return "<html><body><h1>Hello Friend!</h1></body></html>";
-//
-//        });
         Sql2oBeverageDao beverageDao;
         Sql2oClotheDao clotheDao;
         Sql2oLinks links;
@@ -40,6 +33,8 @@ public class App {
         links = new Sql2oLinks();
         tourDao = new Sql2oTourDao(sql2o);
         reviewDao = new Sql2oReviewDao(sql2o);
+
+        enableCORS("*", "POST,GET", "");
 
         post("/beverages/new", "application/json", (req, res) -> {
             Beverages beverage = gson.fromJson(req.body(), Beverages.class);
@@ -65,14 +60,6 @@ public class App {
             res.type("application/json");
             return gson.toJson(clotheDao.findAll());
         });
-
-//        post("/tours/new", "application/json", (req, res) -> {
-//            Tour tour = gson.fromJson(req.body(), Tour.class);
-//            tourDao.add(tour);
-//            res.status(201);
-//            res.type("application/json");
-//            return gson.toJson(tourDao);
-//        });
 
         post("/tours/new", "application/json", (req, res) -> {
             Tour tour = gson.fromJson(req.body(), Tour.class);
@@ -103,11 +90,11 @@ public class App {
         });
 
         post("/tours/:tourId/reviews/new", "application/json", (req, res) -> {
-            int restaurantId = Integer.parseInt(req.params("tourId"));
+            int tourId = Integer.parseInt(req.params("tourId"));
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedAt(); //I am new!
             review.setFormattedCreatedAt();
-            review.setTourId(restaurantId); //we need to set this separately because it comes from our route, not our JSON input.
+            review.setTourId(tourId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewDao.add(review);
             res.status(201);
             return gson.toJson(review);
@@ -128,7 +115,7 @@ public class App {
             return gson.toJson(allReviews);
         });
 
-        get("/restaurants/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
+        get("/tours/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
             int tourId = Integer.parseInt(req.params("id"));
             Tour tourToFind = tourDao.findById(tourId);
             List<Review> allReviews;
@@ -154,6 +141,33 @@ public class App {
             res.type("application/json");
         });
 
+    }
+
+    // Enables CORS on requests. This method is an initialization method and should be called once.
+    private static void enableCORS(final String origin, final String methods, final String headers) {
+
+        options("/*", (request, response) -> {
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        before((request, response) -> {
+            response.header("Access-Control-Allow-Origin", origin);
+            response.header("Access-Control-Request-Method", methods);
+            response.header("Access-Control-Allow-Headers", headers);
+            // Note: this may or may not be necessary in your particular application
+            response.type("application/json");
+        });
     }
 
 }

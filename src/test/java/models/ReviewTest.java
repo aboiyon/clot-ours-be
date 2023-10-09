@@ -32,14 +32,14 @@ public class ReviewTest {
     @Test
     public void getWrittenBy() {
         Review testReview = setupReview();
-        assertEquals("Kim", testReview.getWrittenBy());
+        assertEquals("Kim", testReview.getAuthor());
     }
 
     @Test
     public void setWrittenBy() {
         Review testReview = setupReview();
-        testReview.setWrittenBy("Mike");
-        assertNotEquals("Kim", testReview.getWrittenBy());
+        testReview.setAuthor("Mike");
+        assertNotEquals("Kim", testReview.getAuthor());
     }
 
     @Test

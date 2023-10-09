@@ -13,11 +13,11 @@ price int
 
 CREATE TABLE IF NOT EXISTS reviews (
  id SERIAL PRIMARY KEY,
- writtenBy VARCHAR,
+ author VARCHAR,
  rating VARCHAR,
  content VARCHAR,
  tourId INTEGER,
- createdAt BIGINT
+ createdat BIGINT
 );
 
 CREATE DATABASE utalii_test WITH TEMPLATE utalii;
