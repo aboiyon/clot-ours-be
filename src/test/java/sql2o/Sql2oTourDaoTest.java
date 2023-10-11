@@ -78,8 +78,8 @@ public class Sql2oTourDaoTest {
         Tour testTour = setupTour();
         tourDao.update(testTour.getId(), "a", "b", "c", 'd');
         Tour foundTour = tourDao.findById(testTour.getId());
-        assertEquals("a", foundTour.getTourName());
-        assertEquals("b", foundTour.getTourDescription());
+        assertEquals("a", foundTour.getName());
+        assertEquals("b", foundTour.getDescription());
         assertEquals("c", foundTour.getImageUrl());
         assertEquals('d', foundTour.getPrice());
     }
@@ -101,7 +101,7 @@ public class Sql2oTourDaoTest {
 
 //    helpers
     public Tour setupTour (){
-        Tour tour = new Tour("","","", "", 0);
+        Tour tour = new Tour("","","", "", imageId, 0);
         tourDao .add(tour);
         return tour;
     }

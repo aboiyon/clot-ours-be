@@ -16,7 +16,7 @@ public class Sql2oTourDao implements ToursDao {
 
     @Override
     public void add(Tour tour) {
-        String sql = "INSERT INTO tours (tourName, tourDescription, imageUrl, price ) VALUES (:tourName, :tourDescription, :imageUrl, :price)";
+        String sql = "INSERT INTO tours (name, description, imageUrl, imageId, price ) VALUES (:name, :description, :imageUrl, :imageId, :price)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(tour)
@@ -46,13 +46,14 @@ public class Sql2oTourDao implements ToursDao {
     }
 
     @Override
-    public void update(int id, String newName, String newDescription, String newImageUrl, double newPrice) {
-        String sql = "UPDATE tours SET (tourName, tourDescription, imageUrl, price) = (:tourName, :tourDescription, :imageUrl, :price ) WHERE id=:id"; //CHECK!!!
+    public void update(int id, String newName, String newDescription, String newImageUrl, int newImageId, double newPrice) {
+        String sql = "UPDATE tours SET (name, description, imageUrl, imageId, price) = (:name, :description, :imageUrl, :imageId, :price ) WHERE id=:id"; //CHECK!!!
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("tourName", newName)
-                    .addParameter("tourDescription", newDescription)
+                    .addParameter("name", newName)
+                    .addParameter("description", newDescription)
                     .addParameter("imageUrl", newImageUrl)
+                    .addParameter("imageId", newImageId)
                     .addParameter("price", newPrice)
                     .addParameter("id", id)
                     .executeUpdate();

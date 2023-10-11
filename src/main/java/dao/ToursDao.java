@@ -14,7 +14,7 @@ public interface ToursDao {
     Tour findById(int id);
 
     //update
-    void update(int id, String name, String description, String imageUrl, double price);
+    void update(int id, String name, String description, String imageUrl, int imageId, double price);
 
     //    delete
     void deleteById(int id);

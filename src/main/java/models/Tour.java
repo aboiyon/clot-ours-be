@@ -4,17 +4,27 @@ import java.util.Objects;
 
 public class Tour {
     private int id;
-    private String tourName;
-    private String tourDescription;
+    private String name;
+    private String description;
     private String  imageUrl;
+    private int imageId;
     private int price;
 
 
-    public Tour(String name, String tourName, String tourDescription, String imageUrl, int price) {
-        this.tourName = tourName;
-        this.tourDescription = tourDescription;
+    public Tour(String name, String description, String imageUrl, int imageId, int price) {
+        this.name = name;
+        this.description = description;
         this.imageUrl = imageUrl;
+        this.imageId = imageId;
         this.price = price;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 
     public int getId() {
@@ -25,20 +35,20 @@ public class Tour {
         this.id = id;
     }
 
-    public String getTourName() {
-        return tourName;
+    public String getName() {
+        return name;
     }
 
-    public void setTourName(String tourName) {
-        this.tourName = tourName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTourDescription() {
-        return tourDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTourDescription(String tourDescription) {
-        this.tourDescription = tourDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {
@@ -63,14 +73,16 @@ public class Tour {
         if (!(o instanceof Tour)) return false;
         Tour tour = (Tour) o;
         return id == tour.id &&
+                imageId == tour.imageId &&
                 price == tour.price &&
-                tourName.equals(tour.tourName) &&
-                tourDescription.equals(tour.tourDescription) &&
+                name.equals(tour.name) &&
+                description.equals(tour.description) &&
                 imageUrl.equals(tour.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tourName, tourDescription, imageUrl, price);
+        return Objects.hash(id, name, description, imageUrl, imageId, price);
     }
+
 }
