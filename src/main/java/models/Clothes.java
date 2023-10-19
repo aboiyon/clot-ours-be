@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class Clothes {
     private int id;
-    private String clotheName;
-    private String clotheDescription;
+    private String name;
+    private String description;
     private String  imageUrl;
     private int price;
 
-    public Clothes (String clotheName, String clotheDescription, String imageUrl, int price){
-        this.clotheName = clotheName;
-        this.clotheDescription = clotheDescription;
+    public Clothes (String name, String description, String imageUrl, int price){
+        this.name = name;
+        this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
     }
@@ -24,20 +24,20 @@ public class Clothes {
         this.id = id;
     }
 
-    public String getClotheName() {
-        return clotheName;
+    public String getName() {
+        return name;
     }
 
-    public void setClotheName(String clotheName) {
-        this.clotheName = clotheName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getClotheDescription() {
-        return clotheDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setClotheDescription(String clotheDescription) {
-        this.clotheDescription = clotheDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {
@@ -63,14 +63,14 @@ public class Clothes {
         Clothes clothes = (Clothes) o;
         return id == clothes.id &&
                 price == clothes.price &&
-                clotheName.equals(clothes.clotheName) &&
-                clotheDescription.equals(clothes.clotheDescription) &&
+                name.equals(clothes.name) &&
+                description.equals(clothes.description) &&
                 imageUrl.equals(clothes.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clotheName, clotheDescription, imageUrl, price);
+        return Objects.hash(id, name, description, imageUrl, price);
     }
 
 }
