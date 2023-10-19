@@ -1,18 +1,20 @@
 package dao;
 
-import models.Beverages;
 import models.Clothes;
 
 import java.util.List;
 
 public interface ClothesInterface {
 
-    //    create
-    void create(Clothes clothes);
+    //    add
+    void add(Clothes clothes);
 
     //    read
-    List<Clothes> findAll();
+    List<Clothes> getAll();
     Clothes findById(int id);
+
+//    update
+    void update(int id, String name, String description, String imageUrl, double price);
 
     //    delete
     void  deleteAll(Clothes clothes);

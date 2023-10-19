@@ -50,15 +50,23 @@ public class App {
 
         post("/clothes/new", "application/json", (req, res) -> {
             Clothes clothe = gson.fromJson(req.body(), Clothes.class);
-            clotheDao.create(clothe);
+            clotheDao.add(clothe);
             res.status(201);
-            res.type("application/json");
-            return gson.toJson(clotheDao);
+            return gson.toJson(clothe);
         });
 
         get("/clothes", "application/json", (req, res) -> {
             res.type("application/json");
-            return gson.toJson(clotheDao.findAll());
+            return gson.toJson(clotheDao.getAll());
+        });
+
+        get("/clothes/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            int clotheId = Integer.parseInt(req.params("id"));
+            Clothes clotheToFind = clotheDao.findById(clotheId);
+            if (clotheToFind == null){
+                throw new ApiException(404, String.format("No clothe with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(clotheToFind);
         });
 
         post("/tours/new", "application/json", (req, res) -> {
