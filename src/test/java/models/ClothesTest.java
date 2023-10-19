@@ -21,15 +21,15 @@ public class ClothesTest {
     @Test
     public void setClotheName(){
         Clothes clothes = new Clothes("","","",0);
-        clothes.setClotheName("dera");
-        assertEquals("dera", clothes.getClotheName());
+        clothes.setName("dera");
+        assertEquals("dera", clothes.getName());
     }
 
     @Test
     public void setClotheDescriptionCheck(){
         Clothes clothes = new Clothes("","","",0);
-        clothes.setClotheDescription("Women's clothes");
-        assertEquals("Women's clothes", clothes.getClotheDescription());
+        clothes.setDescription("Women's clothes");
+        assertEquals("Women's clothes", clothes.getDescription());
     }
 
     @Test
