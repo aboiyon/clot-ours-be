@@ -58,14 +58,14 @@ public class ReviewTest {
     @Test
     public void getTourId() {
         Review testReview = setupReview();
-        assertEquals(0, testReview.getTourId());
+        assertEquals(0, testReview.getKidId());
     }
 
     @Test
     public void setTourId() {
         Review testReview = setupReview();
-        testReview.setTourId(10);
-        assertNotEquals(1, testReview.getTourId());
+        testReview.setKidId(10);
+        assertNotEquals(1, testReview.getKidId());
     }
 
     @Test

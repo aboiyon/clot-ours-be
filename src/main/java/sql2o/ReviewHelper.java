@@ -9,14 +9,14 @@ import org.sql2o.Sql2oException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sql2oReviewDao implements ReviewDao {
+public class ReviewHelper implements ReviewDao {
     private final Sql2o sql2o;
-    public Sql2oReviewDao(Sql2o sql2o) { this.sql2o = sql2o; }
+    public ReviewHelper(Sql2o sql2o) { this.sql2o = sql2o; }
 
     @Override
     public void add(Review review) {
-        String sql = "INSERT INTO reviews (author, rating, content, tourId, createdat) VALUES (:author, :rating, :content, :tourId, :createdat)";
-        try (Connection con = sql2o.open()) {
+        String sql = "INSERT INTO reviews (author, rating, content, kidId, createdat) VALUES (:author, :rating, :content, :kidId, :createdat)";
+        try (org.sql2o.Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(review)
                     .executeUpdate()
@@ -36,17 +36,17 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> getAllReviewsByTour(int tourId) {
+    public List<Review> getAllReviewsByKid(int kidId) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM reviews WHERE tourId = :tourId")
-                    .addParameter("tourId", tourId)
+            return con.createQuery("SELECT * FROM reviews WHERE kidId = :kidId")
+                    .addParameter("kidId", kidId)
                     .executeAndFetch(Review.class);
         }
     }
 
     @Override
-    public List<Review> getAllReviewsByTourSortedNewestToOldest(int tourId) {
-        List<Review> unsortedReviews = getAllReviewsByTour(tourId);
+    public List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId) {
+        List<Review> unsortedReviews = getAllReviewsByKid(kidId);
         List<Review> sortedReviews = new ArrayList<>();
         int i = 1;
         for (Review review : unsortedReviews){

@@ -9,16 +9,17 @@ public class Review implements Comparable<Review>{
     private String author;
     private int rating;
     private int id;
-    private int tourId;
+    private int kidId;
     private long createdat;
     private String formattedCreatedAt;
 
-    public Review(String content, String author, int rating, int id, int tourId, long createdat, String formattedCreatedAt) {
+
+    public Review(String content, String author, int rating, int id, int kidId, long createdat, String formattedCreatedAt) {
         this.content = content;
         this.author = author;
         this.rating = rating;
         this.id = id;
-        this.tourId = tourId;
+        this.kidId = kidId;
         this.createdat = System.currentTimeMillis();
         setFormattedCreatedAt();
     }
@@ -93,12 +94,12 @@ public class Review implements Comparable<Review>{
         this.id = id;
     }
 
-    public int getTourId() {
-        return tourId;
+    public int getKidId() {
+        return kidId;
     }
 
-    public void setTourId(int tourId) {
-        this.tourId = tourId;
+    public void setKidId(int kidId) {
+        this.kidId = kidId;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class Review implements Comparable<Review>{
         Review review = (Review) o;
         return rating == review.rating &&
                 id == review.id &&
-                tourId == review.tourId &&
+                kidId == review.kidId &&
                 createdat == review.createdat &&
                 Objects.equals(content, review.content) &&
                 Objects.equals(author, review.author) &&
@@ -117,6 +118,6 @@ public class Review implements Comparable<Review>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, author, rating, id, tourId, createdat, formattedCreatedAt);
+        return Objects.hash(content, author, rating, id, kidId, createdat, formattedCreatedAt);
     }
 }

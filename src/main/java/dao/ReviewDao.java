@@ -10,8 +10,8 @@ public interface ReviewDao {
 
     //read
     List<Review> getAll();
-    List<Review> getAllReviewsByTour(int tourId);
-    List<Review> getAllReviewsByTourSortedNewestToOldest(int tourId);
+    List<Review> getAllReviewsByKid(int kidId);
+    List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId);
 
     //update
     //omit for now

@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS tours (
     price int
 );
 
+
+
 CREATE TABLE IF NOT EXISTS images (
     id SERIAL PRIMARY KEY,
     tourId INT,
@@ -24,7 +26,7 @@ CREATE TABLE IF NOT EXISTS reviews (
  author VARCHAR,
  rating VARCHAR,
  content VARCHAR,
- tourId INTEGER,
+ kidId INTEGER,
  createdat BIGINT
 );
 
