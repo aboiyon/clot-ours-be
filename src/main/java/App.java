@@ -16,6 +16,7 @@ public class App {
         Sql2oTourDao tourDao;
         ReviewHelper reviewHelper;
         KidHelper kidHelper;
+        ManHelper manHelper;
         WomanHelper womanHelper;
         Connection conn;
         Gson gson = new Gson();
@@ -27,6 +28,7 @@ public class App {
         tourDao = new Sql2oTourDao(sql2o);
         reviewHelper = new ReviewHelper(sql2o);
         kidHelper = new KidHelper(sql2o);
+        manHelper = new ManHelper(sql2o);
         womanHelper = new WomanHelper(sql2o);
 
         enableCORS("*", "POST,GET", "");
@@ -96,18 +98,18 @@ public class App {
             return gson.toJson(allReviews);
         });
 
-        post("/tours/new", "application/json", (req, res) -> {
-            Tour tour = gson.fromJson(req.body(), Tour.class);
-            tourDao.add(tour);
+        post("/men/new", "application/json", (req, res) -> {
+            Man man = gson.fromJson(req.body(), Man.class);
+            manHelper.add(man);
             res.status(201);
-            return gson.toJson(tour);
+            return gson.toJson(man);
         });
 
-        get("/tours", "application/json", (req, res) -> {
-            System.out.println(tourDao.getAll());
+        get("/men", "application/json", (req, res) -> {
+            System.out.println(manHelper.getAll());
 
-            if(tourDao.getAll().size() > 0){
-                return gson.toJson(tourDao.getAll());
+            if(manHelper.getAll().size() > 0){
+                return gson.toJson(manHelper.getAll());
             }
 
             else {
@@ -115,49 +117,49 @@ public class App {
             }
         });
 
-        get("/tours/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
-            int tourId = Integer.parseInt(req.params("id"));
-            Tour tourToFind = tourDao.findById(tourId);
-            if (tourToFind == null){
+        get("/men/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            int manId = Integer.parseInt(req.params("id"));
+            Man manToFind = manHelper.findById(manId);
+            if (manToFind == null){
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
-            return gson.toJson(tourToFind);
+            return gson.toJson(manToFind);
         });
 
-        post("/tours/:tourId/reviews/new", "application/json", (req, res) -> {
-            int tourId = Integer.parseInt(req.params("tourId"));
+        post("/men/:manId/reviews/new", "application/json", (req, res) -> {
+            int manId = Integer.parseInt(req.params("manId"));
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedAt(); //I am new!
             review.setFormattedCreatedAt();
-            review.setKidId(tourId); //we need to set this separately because it comes from our route, not our JSON input.
+            review.setKidId(manId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewHelper.add(review);
             res.status(201);
             return gson.toJson(review);
         });
 
-        get("/tours/:id/reviews", "application/json", (req, res) -> {
-            int tourId = Integer.parseInt(req.params("id"));
+        get("/men/:id/reviews", "application/json", (req, res) -> {
+            int manId = Integer.parseInt(req.params("id"));
 
-            Tour tourToFind = tourDao.findById(tourId);
+            Man manToFind = manHelper.findById(manId);
             List<Review> allReviews;
 
-            if (tourToFind == null){
+            if (manToFind == null){
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
 
-            allReviews = reviewHelper.getAllReviewsByKid(tourId);
+            allReviews = reviewHelper.getAllReviewsByKid(manId);
 
             return gson.toJson(allReviews);
         });
 
-        get("/tours/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
-            int tourId = Integer.parseInt(req.params("id"));
-            Tour tourToFind = tourDao.findById(tourId);
+        get("/men/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
+            int manId = Integer.parseInt(req.params("id"));
+            Man manToFind = manHelper.findById(manId);
             List<Review> allReviews;
-            if (tourToFind == null){
+            if (manToFind == null){
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
-            allReviews = reviewHelper.getAllReviewsByKidSortedNewestToOldest(tourId);
+            allReviews = reviewHelper.getAllReviewsByKidSortedNewestToOldest(manId);
             return gson.toJson(allReviews);
         });
 
