@@ -5,9 +5,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
-import java.sql.Connection;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -17,16 +16,6 @@ public class WomanHelperTest {
     private static WomanHelper womanHelper;
     private static KidHelper kidHelper;
     private static ReviewHelper reviewHelper;
-
-    @BeforeClass
-    public static void setUp() throws Exception {
-        String connectionString = "jdbc:postgresql://localhost:5432/utalii_test";
-        Sql2o sql2o = new Sql2o(connectionString, "cheruiyot", "new_password");
-        womanHelper = new WomanHelper(sql2o);
-        kidHelper = new KidHelper(sql2o);
-        reviewHelper = new ReviewHelper(sql2o);
-        connection = sql2o.open();
-    }
 
     @BeforeClass
     public static void setUp() throws Exception {
