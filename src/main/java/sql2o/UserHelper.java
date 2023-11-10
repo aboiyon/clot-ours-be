@@ -2,7 +2,7 @@ package sql2o;
 
 import dao.UserService;
 
-public class Sql2OUser implements UserService {
+public class UserHelper implements UserService {
 
     @Override
     public void addUser() {

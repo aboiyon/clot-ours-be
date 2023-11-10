@@ -13,7 +13,6 @@ import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
-        Sql2oTourDao tourDao;
         ReviewHelper reviewHelper;
         KidHelper kidHelper;
         ManHelper manHelper;
@@ -25,7 +24,6 @@ public class App {
         String connectionString = "jdbc:postgresql://localhost:5432/utalii";
         Sql2o sql2o = new Sql2o(connectionString, "cheruiyot", "new_password");
 
-        tourDao = new Sql2oTourDao(sql2o);
         reviewHelper = new ReviewHelper(sql2o);
         kidHelper = new KidHelper(sql2o);
         manHelper = new ManHelper(sql2o);

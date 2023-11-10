@@ -1,7 +1,6 @@
 package sql2o;
 
 import dao.KidService;
-import models.Clothes;
 import models.Kid;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
