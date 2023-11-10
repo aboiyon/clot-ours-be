@@ -1,6 +1,6 @@
 package sql2o;
 
-import dao.ReviewDao;
+import dao.ReviewService;
 import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ReviewHelper implements ReviewDao {
+public class ReviewHelper implements ReviewService {
     private final Sql2o sql2o;
     public ReviewHelper(Sql2o sql2o) { this.sql2o = sql2o; }
 
@@ -75,93 +75,18 @@ public class ReviewHelper implements ReviewDao {
     public List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId) {
         List<Review> unsortedReviews = getAllReviewsByKid(kidId);
         return sortReviewsNewestToOldest(unsortedReviews);
-//        List<Review> sortedReviews = new ArrayList<>();
-//        int i = 1;
-//        for (Review review : unsortedReviews){
-//            int comparisonResult;
-//            if (i == unsortedReviews.size()) { //we need to do some funky business here to avoid an array index exception and handle the last element properly
-//                if (review.compareTo(unsortedReviews.get(i-1)) == -1){
-//                    sortedReviews.add(0, unsortedReviews.get(i-1));
-//                }
-//                break;
-//            }
-//
-//            else {
-//                if (review.compareTo(unsortedReviews.get(i)) == -1) { //first object was made earlier than second object
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else if (review.compareTo(unsortedReviews.get(i)) == 0) {//probably should have a tie breaker here as they are the same.
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else {
-//                    sortedReviews.add(0, unsortedReviews.get(i)); //push the first object to the list as it is newer than the second object.
-//                    i++;
-//                }
-//            }
-//        }
-//        return sortedReviews;
     }
 
     @Override
     public List<Review> getAllReviewsByManSortedNewestToOldest(int manId) {
         List<Review> unsortedReviews = getAllReviewsByMan(manId);
         return sortReviewsNewestToOldest(unsortedReviews);
-//        List<Review> sortedReviews = new ArrayList<>();
-//        int i = 1;
-//        for (Review review : unsortedReviews){
-//            int comparisonResult;
-//            if (i == unsortedReviews.size()) { //we need to do some funky business here to avoid an array index exception and handle the last element properly
-//                if (review.compareTo(unsortedReviews.get(i-1)) == -1){
-//                    sortedReviews.add(0, unsortedReviews.get(i-1));
-//                }
-//                break;
-//            }
-//
-//            else {
-//                if (review.compareTo(unsortedReviews.get(i)) == -1) { //first object was made earlier than second object
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else if (review.compareTo(unsortedReviews.get(i)) == 0) {//probably should have a tie breaker here as they are the same.
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else {
-//                    sortedReviews.add(0, unsortedReviews.get(i)); //push the first object to the list as it is newer than the second object.
-//                    i++;
-//                }
-//            }
-//        }
-//        return sortedReviews;
     }
 
     @Override
     public List<Review> getAllReviewsByWomanSortedNewestToOldest(int womanId) {
         List<Review> unsortedReviews = getAllReviewsByWoman(womanId);
         return sortReviewsNewestToOldest(unsortedReviews);
-//        List<Review> sortedReviews = new ArrayList<>();
-//        int i = 1;
-//        for (Review review : unsortedReviews){
-//            int comparisonResult;
-//            if (i == unsortedReviews.size()) { //we need to do some funky business here to avoid an array index exception and handle the last element properly
-//                if (review.compareTo(unsortedReviews.get(i-1)) == -1){
-//                    sortedReviews.add(0, unsortedReviews.get(i-1));
-//                }
-//                break;
-//            }
-//
-//            else {
-//                if (review.compareTo(unsortedReviews.get(i)) == -1) { //first object was made earlier than second object
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else if (review.compareTo(unsortedReviews.get(i)) == 0) {//probably should have a tie breaker here as they are the same.
-//                    sortedReviews.add(0, unsortedReviews.get(i));
-//                    i++;
-//                } else {
-//                    sortedReviews.add(0, unsortedReviews.get(i)); //push the first object to the list as it is newer than the second object.
-//                    i++;
-//                }
-//            }
-//        }
-//        return sortedReviews;
     }
 
     @Override

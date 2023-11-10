@@ -4,7 +4,7 @@ import models.Review;
 
 import java.util.List;
 
-public interface ReviewDao {
+public interface ReviewService {
     //create
     void add(Review review);
 
@@ -18,7 +18,6 @@ public interface ReviewDao {
     List<Review> getAllReviewsByWomanSortedNewestToOldest(int womanId);
 
     //update
-    //omit for now
 
     //delete
     void deleteById(int id);
