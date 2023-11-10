@@ -11,7 +11,11 @@ public interface ReviewDao {
     //read
     List<Review> getAll();
     List<Review> getAllReviewsByKid(int kidId);
+    List<Review> getAllReviewsByMan(int manId);
+    List<Review> getAllReviewsByWoman(int womanId);
     List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId);
+    List<Review> getAllReviewsByManSortedNewestToOldest(int manId);
+    List<Review> getAllReviewsByWomanSortedNewestToOldest(int womanId);
 
     //update
     //omit for now

@@ -129,7 +129,7 @@ public class App {
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedAt(); //I am new!
             review.setFormattedCreatedAt();
-            review.setKidId(manId); //we need to set this separately because it comes from our route, not our JSON input.
+            review.setManId(manId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewHelper.add(review);
             res.status(201);
             return gson.toJson(review);
@@ -145,7 +145,7 @@ public class App {
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
 
-            allReviews = reviewHelper.getAllReviewsByKid(manId);
+            allReviews = reviewHelper.getAllReviewsByMan(manId);
 
             return gson.toJson(allReviews);
         });
@@ -157,7 +157,7 @@ public class App {
             if (manToFind == null){
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
-            allReviews = reviewHelper.getAllReviewsByKidSortedNewestToOldest(manId);
+            allReviews = reviewHelper.getAllReviewsByManSortedNewestToOldest(manId);
             return gson.toJson(allReviews);
         });
 
@@ -189,12 +189,12 @@ public class App {
             return gson.toJson(womanToFind);
         });
 
-        post("/women/:kidId/reviews/new", "application/json", (req, res) -> {
+        post("/women/:womanId/reviews/new", "application/json", (req, res) -> {
             int womanId = Integer.parseInt(req.params("womanId"));
             Review review = gson.fromJson(req.body(), Review.class);
             review.setCreatedAt(); //I am new!
             review.setFormattedCreatedAt();
-            review.setKidId(womanId); //we need to set this separately because it comes from our route, not our JSON input.
+            review.setWomanId(womanId); //we need to set this separately because it comes from our route, not our JSON input.
             reviewHelper.add(review);
             res.status(201);
             return gson.toJson(review);
@@ -210,7 +210,7 @@ public class App {
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
 
-            allReviews = reviewHelper.getAllReviewsByKid(womanId);
+            allReviews = reviewHelper.getAllReviewsByWoman(womanId);
 
             return gson.toJson(allReviews);
         });
@@ -222,7 +222,7 @@ public class App {
             if (womanToFind == null){
                 throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
             }
-            allReviews = reviewHelper.getAllReviewsByKidSortedNewestToOldest(womanId);
+            allReviews = reviewHelper.getAllReviewsByWomanSortedNewestToOldest(womanId);
             return gson.toJson(allReviews);
         });
         
