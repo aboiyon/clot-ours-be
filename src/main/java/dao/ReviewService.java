@@ -13,9 +13,11 @@ public interface ReviewService {
     List<Review> getAllReviewsByKid(int kidId);
     List<Review> getAllReviewsByMan(int manId);
     List<Review> getAllReviewsByWoman(int womanId);
+    List<Review> getAllReviewsByDesigner(int designerId);
     List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId);
     List<Review> getAllReviewsByManSortedNewestToOldest(int manId);
     List<Review> getAllReviewsByWomanSortedNewestToOldest(int womanId);
+    List<Review> getAllReviewsByDesignerSortedNewestToOldest(int designerId);
 
     //update
 

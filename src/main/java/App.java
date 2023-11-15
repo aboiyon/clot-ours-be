@@ -17,6 +17,7 @@ public class App {
         KidHelper kidHelper;
         ManHelper manHelper;
         WomanHelper womanHelper;
+        DesignerHelper designerHelper;
         Connection conn;
         Gson gson = new Gson();
 
@@ -28,6 +29,7 @@ public class App {
         kidHelper = new KidHelper(sql2o);
         manHelper = new ManHelper(sql2o);
         womanHelper = new WomanHelper(sql2o);
+        designerHelper = new DesignerHelper(sql2o);
 
         enableCORS("*", "POST,GET", "");
 
@@ -207,7 +209,7 @@ public class App {
             List<Review> allReviews;
 
             if (womanToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No women clothe with the id: \"%s\" exists", req.params("id")));
             }
 
             allReviews = reviewHelper.getAllReviewsByWoman(womanId);
@@ -220,12 +222,78 @@ public class App {
             Woman womanToFind = womanHelper.findById(womanId);
             List<Review> allReviews;
             if (womanToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No women clothe with the id: \"%s\" exists", req.params("id")));
             }
             allReviews = reviewHelper.getAllReviewsByWomanSortedNewestToOldest(womanId);
             return gson.toJson(allReviews);
         });
-        
+
+        post("/designers/new", "application/json", (req, res) -> {
+            Designer designer = gson.fromJson(req.body(), Designer.class);
+            designerHelper.add(designer);
+            res.status(201);
+            return gson.toJson(designer);
+        });
+
+        get("/designers", "application/json", (req, res) -> {
+            System.out.println(designerHelper.getAll());
+
+            if(designerHelper.getAll().size() > 0){
+                return gson.toJson(designerHelper.getAll());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but no designer clothes are currently listed in the database.\"}";
+            }
+        });
+
+        get("/designers/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            int designerId = Integer.parseInt(req.params("id"));
+            Designer designerToFind = designerHelper.findById(designerId);
+            if (designerToFind == null){
+                throw new ApiException(404, String.format("No designer clothe with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(designerToFind);
+        });
+
+        post("/designers/:designerId/reviews/new", "application/json", (req, res) -> {
+            int designerId = Integer.parseInt(req.params("designerId"));
+            Review review = gson.fromJson(req.body(), Review.class);
+            review.setCreatedAt(); //I am new!
+            review.setFormattedCreatedAt();
+            review.setDesignerId(designerId); //we need to set this separately because it comes from our route, not our JSON input.
+            reviewHelper.add(review);
+            res.status(201);
+            return gson.toJson(review);
+        });
+
+        get("/designers/:id/reviews", "application/json", (req, res) -> {
+            int designerId = Integer.parseInt(req.params("id"));
+
+            Designer designerToFind = designerHelper.findById(designerId);
+            List<Review> allReviews;
+
+            if (designerToFind == null){
+                throw new ApiException(404, String.format("No designer clothe review with the id: \"%s\" exists", req.params("id")));
+            }
+
+            allReviews = reviewHelper.getAllReviewsByDesigner(designerId);
+
+            return gson.toJson(allReviews);
+        });
+
+        get("/designers/:id/sortedReviews", "application/json", (req, res) -> { //// TODO: 1/18/18 generalize this route so that it can be used to return either sorted reviews or unsorted ones.
+            int designerId = Integer.parseInt(req.params("id"));
+            Designer designerToFind = designerHelper.findById(designerId);
+            List<Review> allReviews;
+            if (designerToFind == null){
+                throw new ApiException(404, String.format("No designer clothe review with the id: \"%s\" exists", req.params("id")));
+            }
+            allReviews = reviewHelper.getAllReviewsByDesignerSortedNewestToOldest(designerId);
+            return gson.toJson(allReviews);
+        });
+
+
         //FILTERS
         exception(ApiException.class, (exception, req, res) -> {
             ApiException err = exception;

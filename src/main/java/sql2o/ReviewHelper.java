@@ -24,7 +24,7 @@ public class ReviewHelper implements ReviewService {
 
     @Override
     public void add(Review review) {
-        String sql = "INSERT INTO reviews (author, rating, content, kidId, manId, womanId, createdat) VALUES (:author, :rating, :content, :kidId, :manId, :womanId, :createdat)";
+        String sql = "INSERT INTO reviews (author, rating, content, kidId, manId, womanId, designerId, createdat ) VALUES (:author, :rating, :content, :kidId, :manId, :womanId, :designerId, :createdat)";
         try (org.sql2o.Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(review)
@@ -72,6 +72,15 @@ public class ReviewHelper implements ReviewService {
     }
 
     @Override
+    public List<Review> getAllReviewsByDesigner(int designerId) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM reviews WHERE designerId = :designerId")
+                    .addParameter("designerId", designerId)
+                    .executeAndFetch(Review.class);
+        }
+    }
+
+    @Override
     public List<Review> getAllReviewsByKidSortedNewestToOldest(int kidId) {
         List<Review> unsortedReviews = getAllReviewsByKid(kidId);
         return sortReviewsNewestToOldest(unsortedReviews);
@@ -86,6 +95,12 @@ public class ReviewHelper implements ReviewService {
     @Override
     public List<Review> getAllReviewsByWomanSortedNewestToOldest(int womanId) {
         List<Review> unsortedReviews = getAllReviewsByWoman(womanId);
+        return sortReviewsNewestToOldest(unsortedReviews);
+    }
+
+    @Override
+    public List<Review> getAllReviewsByDesignerSortedNewestToOldest(int designerId) {
+        List<Review> unsortedReviews = getAllReviewsByDesigner(designerId);
         return sortReviewsNewestToOldest(unsortedReviews);
     }
 
