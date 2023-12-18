@@ -7,14 +7,14 @@ public class Designer {
     private int id;
     private String name;
     private String description;
-    private String imageUrl01;
+    private String imageUrl;
     private String imageUrl02;
     private BigDecimal price;
 
-    public Designer(String name, String description, String imageUrl01, String imageUrl02, BigDecimal price) {
+    public Designer(String name, String description, String imageUrl, String imageUrl02, BigDecimal price) {
         this.name = name;
         this.description = description;
-        this.imageUrl01 = imageUrl01;
+        this.imageUrl = imageUrl;
         this.imageUrl02 = imageUrl02;
         this.price = price;
     }
@@ -43,12 +43,12 @@ public class Designer {
         this.description = description;
     }
 
-    public String getImageUrl01() {
-        return imageUrl01;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageUrl01(String imageUrl01) {
-        this.imageUrl01 = imageUrl01;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getImageUrl02() {
@@ -75,13 +75,13 @@ public class Designer {
         return id == designer.id &&
                 name.equals(designer.name) &&
                 description.equals(designer.description) &&
-                imageUrl01.equals(designer.imageUrl01) &&
+                imageUrl.equals(designer.imageUrl) &&
                 imageUrl02.equals(designer.imageUrl02) &&
                 price.equals(designer.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, imageUrl01, imageUrl02, price);
+        return Objects.hash(id, name, description, imageUrl, imageUrl02, price);
     }
 }
