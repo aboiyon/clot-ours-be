@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class KidHelper implements KidService {
@@ -16,7 +17,7 @@ public class KidHelper implements KidService {
 
     @Override
     public void add(Kid kid) {
-        String sql = "INSERT INTO kids (name, description, imageUrl, price) VALUES (:name, :description, :imageUrl, :price)";
+        String sql = "INSERT INTO kids (name, description, imageUrl, price, quantity, color) VALUES (:name, :description, :imageUrl, :price, :quantity, :color)";
         try (Connection connection = sql2o.open()){
             int id = (int) connection.createQuery(sql, true)
                     .bind(kid)
@@ -46,8 +47,8 @@ public class KidHelper implements KidService {
     }
 
     @Override
-    public void update(int id, String name, String description, String imageUrl, double price) {
-        String sql = "UPDATE kids  SET (name, description, imageUrl, price) = (:name, :description, :imageUrl, :price) WHERE id = :id";
+    public void update(int id, String name, String description, String imageUrl, BigDecimal price, int quantity, String color) {
+        String sql = "UPDATE kids  SET (name, description, imageUrl, price, quantity, color) = (:name, :description, :imageUrl, :price, :quantity, :color) WHERE id = :id";
         try (Connection connection = sql2o.open()){
             connection.createQuery(sql)
                     .addParameter("id", id)
@@ -55,6 +56,8 @@ public class KidHelper implements KidService {
                     .addParameter("name", description)
                     .addParameter("name", imageUrl)
                     .addParameter("name", price)
+                    .addParameter("quantity", quantity)
+                    .addParameter("color", color)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

@@ -56,7 +56,7 @@ public class App {
             int kidId = Integer.parseInt(req.params("id"));
             Kid kidToFind = kidHelper.findById(kidId);
             if (kidToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No kid clothe with the id: \"%s\" exists", req.params("id")));
             }
             return gson.toJson(kidToFind);
         });
@@ -92,7 +92,7 @@ public class App {
             Woman kidToFind = womanHelper.findById(kidId);
             List<Review> allReviews;
             if (kidToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No kid clothe review with the id: \"%s\" exists", req.params("id")));
             }
             allReviews = reviewHelper.getAllReviewsByKidSortedNewestToOldest(kidId);
             return gson.toJson(allReviews);
@@ -113,7 +113,7 @@ public class App {
             }
 
             else {
-                return "{\"message\":\"I'm sorry, but no tours are currently listed in the database.\"}";
+                return "{\"message\":\"I'm sorry, but no men clothes are currently listed in the database.\"}";
             }
         });
 
@@ -121,7 +121,7 @@ public class App {
             int manId = Integer.parseInt(req.params("id"));
             Man manToFind = manHelper.findById(manId);
             if (manToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No men clothe with the id: \"%s\" exists", req.params("id")));
             }
             return gson.toJson(manToFind);
         });
@@ -144,7 +144,7 @@ public class App {
             List<Review> allReviews;
 
             if (manToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No men clothe review with the id: \"%s\" exists", req.params("id")));
             }
 
             allReviews = reviewHelper.getAllReviewsByMan(manId);
@@ -157,7 +157,7 @@ public class App {
             Man manToFind = manHelper.findById(manId);
             List<Review> allReviews;
             if (manToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No men clothe review with the id: \"%s\" exists", req.params("id")));
             }
             allReviews = reviewHelper.getAllReviewsByManSortedNewestToOldest(manId);
             return gson.toJson(allReviews);
@@ -178,7 +178,7 @@ public class App {
             }
 
             else {
-                return "{\"message\":\"I'm sorry, but no tours are currently listed in the database.\"}";
+                return "{\"message\":\"I'm sorry, but no women clothes are currently listed in the database.\"}";
             }
         });
 
@@ -186,7 +186,7 @@ public class App {
             int womanId = Integer.parseInt(req.params("id"));
             Woman womanToFind = womanHelper.findById(womanId);
             if (womanToFind == null){
-                throw new ApiException(404, String.format("No tour with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No women clothe with the id: \"%s\" exists", req.params("id")));
             }
             return gson.toJson(womanToFind);
         });
@@ -209,7 +209,7 @@ public class App {
             List<Review> allReviews;
 
             if (womanToFind == null){
-                throw new ApiException(404, String.format("No women clothe with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No women clothe review with the id: \"%s\" exists", req.params("id")));
             }
 
             allReviews = reviewHelper.getAllReviewsByWoman(womanId);
@@ -222,7 +222,7 @@ public class App {
             Woman womanToFind = womanHelper.findById(womanId);
             List<Review> allReviews;
             if (womanToFind == null){
-                throw new ApiException(404, String.format("No women clothe with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No women clothe review with the id: \"%s\" exists", req.params("id")));
             }
             allReviews = reviewHelper.getAllReviewsByWomanSortedNewestToOldest(womanId);
             return gson.toJson(allReviews);

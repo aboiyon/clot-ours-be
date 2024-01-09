@@ -2,6 +2,7 @@ package dao;
 
 import models.Man;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ManService {
@@ -13,7 +14,7 @@ public interface ManService {
     Man findById(int id);
 
     //    update
-    void update(int id, String name, String description, String imageUrl, double price);
+    void update(int id, String name, String description, String imageUrl, BigDecimal price, int quantity,String color);
 
     //    delete
     void  deleteAll();
