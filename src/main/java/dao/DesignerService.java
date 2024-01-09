@@ -14,7 +14,7 @@ public interface DesignerService {
     Designer findById(int id);
 
     //    update
-    void update(int id, String name, String description, String imageUrl01, String imageUrl02, BigDecimal price);
+    void update(int id, String name, String description, String imageUrl, BigDecimal price, int quantity, String color);
 
     //    delete
     void  deleteAll();

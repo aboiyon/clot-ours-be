@@ -16,7 +16,7 @@ public class DesignerHelper implements DesignerService {
     }
     @Override
     public void add(Designer designer) {
-        String sql = "INSERT INTO designers (name, description, imageUrl01, imageUrl02, price) VALUES (:name, :description, :imageUrl01, :imageUrl02, :price)";
+        String sql = "INSERT INTO designers (name, description, imageUrl, price, quantity, color) VALUES (:name, :description, :imageUrl, :price, :quantity, :color)";
         try (Connection connection = sql2o.open()){
             int id = (int) connection.createQuery(sql, true)
                     .bind(designer)
@@ -46,16 +46,17 @@ public class DesignerHelper implements DesignerService {
     }
 
     @Override
-    public void update(int id, String name, String description, String imageUrl01, String imageUrl02, BigDecimal price) {
+    public void update(int id, String name, String description, String imageUrl, BigDecimal price, int quantity, String color) {
         String sql = "UPDATE designers SET (name, description, imageUrl01, imageUrl02, price) = (:name, :description, :imageUrl01, :imageUrl02, :price) WHERE id = :id";
         try (Connection connection = sql2o.open()){
             connection.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
                     .addParameter("description", description)
-                    .addParameter("imageUrl01", imageUrl01)
-                    .addParameter("imageUrl02", imageUrl02)
+                    .addParameter("imageUrl", imageUrl)
                     .addParameter("price", price)
+                    .addParameter("quantity", quantity)
+                    .addParameter("color", color)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

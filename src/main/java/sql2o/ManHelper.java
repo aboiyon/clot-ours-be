@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ManHelper implements ManService {
@@ -16,7 +17,7 @@ public class ManHelper implements ManService {
 
     @Override
     public void add(Man man) {
-        String sql = "INSERT INTO men (name, description, imageUrl, price) VALUES (:name, :description, :imageUrl, :price)";
+        String sql = "INSERT INTO men (name, description, imageUrl, price, quantity, color) VALUES (:name, :description, :imageUrl, :price, :quantity, :color)";
         try (Connection connection = sql2o.open()){
             int id = (int) connection.createQuery(sql, true)
                     .bind(man)
@@ -46,8 +47,8 @@ public class ManHelper implements ManService {
     }
 
     @Override
-    public void update(int id, String name, String description, String imageUrl, double price) {
-        String sql = "UPDATE men SET (name, description, imageUrl, price) = (:name, :description, :imageUrl, :price) WHERE id = :id";
+    public void update(int id, String name, String description, String imageUrl, BigDecimal price, int quantity, String color) {
+        String sql = "UPDATE men SET (name, description, imageUrl, price, quantity, color) = (:name, :description, :imageUrl, :price, :quantity, :color) WHERE id = :id";
         try (Connection connection = sql2o.open()){
             connection.createQuery(sql)
                     .addParameter("id", id)
@@ -55,6 +56,8 @@ public class ManHelper implements ManService {
                     .addParameter("description", description)
                     .addParameter("imageUrl", imageUrl)
                     .addParameter("price", price)
+                    .addParameter("quantity", quantity)
+                    .addParameter("color", color)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

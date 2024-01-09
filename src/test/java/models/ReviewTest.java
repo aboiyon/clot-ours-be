@@ -77,6 +77,6 @@ public class ReviewTest {
 
     // helper
     public Review setupReview (){
-        return new Review("Great service", "Kim",4, 0,0, '0', "");
+        return new Review("Great service", "Kim",4, 0,0, '0', '0');
     }
 }
