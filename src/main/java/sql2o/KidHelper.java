@@ -53,9 +53,9 @@ public class KidHelper implements KidService {
             connection.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
-                    .addParameter("name", description)
-                    .addParameter("name", imageUrl)
-                    .addParameter("name", price)
+                    .addParameter("description", description)
+                    .addParameter("imageUrl", imageUrl)
+                    .addParameter(" price", price)
                     .addParameter("quantity", quantity)
                     .addParameter("color", color)
                     .executeUpdate();
