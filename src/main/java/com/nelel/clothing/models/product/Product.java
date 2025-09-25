@@ -34,7 +34,7 @@ public class Product {
     private boolean allowBackorders;    // Accept orders when out of stock
     private int backorderLimit;         // Max backorders allowed
     private String sku;                 // Stock Keeping Unit - unique identifier
-    private double weight;              // For shipping calculations
+    private BigDecimal weight;              // For shipping calculations
     private String tags;                // Comma-separated tags for search/filtering
 
     // === TIMESTAMPS ===
@@ -53,7 +53,7 @@ public class Product {
         this.backorderLimit = 0;
     }
 
-    public Product(String name, String description, BigDecimal price, ProductCategory category) {
+    public Product(String name, String description, BigDecimal price, ProductCategory category, String review) {
         this();
         this.name = name;
         this.description = description;
@@ -308,8 +308,8 @@ public class Product {
     public String getSku() { return sku; }
     public void setSku(String sku) { this.sku = sku; }
 
-    public double getWeight() { return weight; }
-    public void setWeight(double weight) { this.weight = Math.max(0, weight); }
+    public BigDecimal getWeight() { return weight; }
+    public void setWeight(BigDecimal weight) { this.weight = (weight != null) ? weight : BigDecimal.ZERO; }
 
     public String getTags() { return tags; }
     public void setTags(String tags) { this.tags = tags; }
@@ -331,5 +331,23 @@ public class Product {
                 ", available=" + getAvailableQuantity() +
                 ", status=" + getInventoryStatus() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        // Compare by id if both products are persisted, otherwise use sku
+        if (id != 0 && product.id != 0) {
+            return id == product.id;
+        }
+        return sku != null && sku.equals(product.sku);
+    }
+
+    @Override
+    public int hashCode() {
+        // Use id if available, otherwise use sku
+        return id != 0 ? id : (sku != null ? sku.hashCode() : 0);
     }
 }
