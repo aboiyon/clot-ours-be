@@ -2,6 +2,8 @@ package sql2o;
 
 import dao.KidService;
 import models.Kid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -9,7 +11,8 @@ import org.sql2o.Sql2oException;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class KidHelper implements KidService {
+public class  KidHelper implements KidService {
+    private static final Logger log = LoggerFactory.getLogger(KidHelper.class);
     private final Sql2o sql2o;
     public KidHelper(Sql2o sql2o) {
         this.sql2o = sql2o;
@@ -25,7 +28,7 @@ public class KidHelper implements KidService {
                     .getKey();
             kid.setId(id);
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            log.error("e: ", ex);
         }
     }
 
@@ -60,7 +63,7 @@ public class KidHelper implements KidService {
                     .addParameter("color", color)
                     .executeUpdate();
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            log.error("e: ", ex);
         }
 
     }
@@ -72,7 +75,7 @@ public class KidHelper implements KidService {
             connection.createQuery(sql)
                     .executeUpdate();
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            log.error("e: ", ex);
         }
 
     }
@@ -85,7 +88,7 @@ public class KidHelper implements KidService {
                     .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex) {
-            System.out.println(ex);
+            log.error("e: ", ex);
         }
 
     }
