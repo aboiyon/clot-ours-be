@@ -4,6 +4,7 @@ import com.nelel.clothing.controllers.product.ProductController;
 import com.nelel.clothing.sql2o.Sql2oProductDao;
 import exceptions.ApiException;
 import models.*;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import sql2o.*;
 
@@ -22,6 +23,7 @@ public class App {
         DesignerHelper designerHelper;
         Sql2oOrderDao orderDao;
         Gson gson = new Gson();
+        Connection connection;
         port(4567);
 
         staticFileLocation("/public");
@@ -50,6 +52,7 @@ public class App {
         womanHelper = new WomanHelper(sql2o);
         designerHelper = new DesignerHelper(sql2o);
         orderDao = new Sql2oOrderDao(sql2o);
+        connection = sql2o.open();
 
 
         path("/api", () -> {
