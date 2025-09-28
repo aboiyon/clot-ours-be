@@ -6,55 +6,95 @@ import java.util.Objects;
 
 public class Review implements Comparable<Review>{
     private String content;
-    private String writtenBy;
+    private String author;
     private int rating;
     private int id;
-    private int tourId;
-    private long createdAt;
+    private int kidId;
+    private int manId;
+    private int womanId;
+    private int designerId;
+    private long createdat;
     private String formattedCreatedAt;
 
-    public Review(String content, String writtenBy, int rating, int id, int tourId, long createdAt, String formattedCreatedAt) {
+    public Review(String content, String author, int i1, int i, int rating, int id, int kidId) {
         this.content = content;
-        this.writtenBy = writtenBy;
+        this.author = author;
         this.rating = rating;
         this.id = id;
-        this.tourId = tourId;
-        this.createdAt = System.currentTimeMillis();
-        this.formattedCreatedAt = setFormattedCreatedAt();
+        this.kidId = kidId;
+        this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt();
+    }
+
+    // Constructor for Man
+    public Review(String content, String author, int rating, int id, long createdat, int manId) {
+        this.content = content;
+        this.author = author;
+        this.rating = rating;
+        this.id = id;
+        this.manId = manId;
+        this.createdat = createdat;
+        setFormattedCreatedAt();
+    }
+
+    // Constructor for Woman
+    public Review(String content, String author, int rating, int id, int womanId, String formattedCreatedAt) {
+        this.content = content;
+        this.author = author;
+        this.rating = rating;
+        this.id = id;
+        this.womanId = womanId;
+        this.createdat = createdat;
+        setFormattedCreatedAt();
+    }
+
+    public Review(String content, String author, int rating, int id, int designerId, long createdat) {
+        this.content = content;
+        this.author = author;
+        this.rating = rating;
+        this.id = id;
+        this.designerId = designerId;
+        this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt();
+    }
+
+    public Review(String content, String author, int rating, int id, int kidId, int manId, int womanId, int designerId, long createdat, String formattedCreatedAt) {
+        this.content = content;
+        this.author = author;
+        this.rating = rating;
+        this.id = id;
+        this.kidId = kidId;
+        this.manId = manId;
+        this.womanId = womanId;
+        this.designerId = designerId;
+        this.createdat = createdat;
+        this.formattedCreatedAt = formattedCreatedAt;
     }
 
 
     @Override
     public int compareTo(Review reviewObject) {
-        if (this.createdAt < reviewObject.createdAt)
-        {
-            return -1; //this object was made earlier than the second object.
-        }
-        else if (this.createdAt > reviewObject.createdAt){ //this object was made later than the second object
-            return 1;
-        }
-        else {
-            return 0; //they were made at the same time, which is very unlikely, but mathematically not impossible.
-        }
+
+        return Long.compare(this.createdat, reviewObject.createdat);
     }
 
-    public long getCreatedAt(){
-        return createdAt;
+    public long getCreatedat(){
+        return createdat;
     }
 
     public void setCreatedAt() {
-        this.createdAt = System.currentTimeMillis();
+
+        this.createdat = System.currentTimeMillis();
     }
 
-    public String getFormattedCreatedAt(){
-        Date date = new Date(createdAt);
+    public void formattedCreatedAt(){
+        Date date = new Date(createdat);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
-        return sdf.format(date);
+        this.formattedCreatedAt = new SimpleDateFormat(datePatternToUse).format(date);
     }
 
     public String setFormattedCreatedAt(){
-        Date date = new Date(this.createdAt);
+        Date date = new Date(this.createdat);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         this.formattedCreatedAt = sdf.format(date);
@@ -69,12 +109,12 @@ public class Review implements Comparable<Review>{
         this.content = content;
     }
 
-    public String getWrittenBy() {
-        return writtenBy;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setWrittenBy(String writtenBy) {
-        this.writtenBy = writtenBy;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public int getRating() {
@@ -93,20 +133,39 @@ public class Review implements Comparable<Review>{
         this.id = id;
     }
 
-    public int getTourId() {
-        return tourId;
+    public int getKidId() {
+        return kidId;
     }
 
-    public void setTourId(int tourId) {
-        this.tourId = tourId;
+    public void setKidId(int kidId) {
+        this.kidId = kidId;
     }
 
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
+    public int getManId() {
+        return manId;
     }
 
-    public void setFormattedCreatedAt(String formattedCreatedAt) {
-        this.formattedCreatedAt = formattedCreatedAt;
+    public void setManId(int manId) {
+        this.manId = manId;
+    }
+
+    public int getWomanId() {
+
+        return womanId;
+    }
+
+    public void setWomanId(int womanId) {
+
+        this.womanId = womanId;
+    }
+
+    public int getDesignerId() {
+
+        return designerId;
+    }
+
+    public void setDesignerId(int designerId) {
+        this.designerId = designerId;
     }
 
     @Override
@@ -116,15 +175,16 @@ public class Review implements Comparable<Review>{
         Review review = (Review) o;
         return rating == review.rating &&
                 id == review.id &&
-                tourId == review.tourId &&
-                createdAt == review.createdAt &&
-                Objects.equals(content, review.content) &&
-                Objects.equals(writtenBy, review.writtenBy) &&
-                Objects.equals(formattedCreatedAt, review.formattedCreatedAt);
+                kidId == review.kidId &&
+                manId == review.manId &&
+                womanId == review.womanId &&
+                designerId == review.designerId &&
+                content.equals(review.content) &&
+                author.equals(review.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, writtenBy, rating, id, tourId, createdAt, formattedCreatedAt);
+        return Objects.hash(content, author, rating, id, kidId, manId, womanId, designerId);
     }
 }

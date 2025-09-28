@@ -32,14 +32,14 @@ public class ReviewTest {
     @Test
     public void getWrittenBy() {
         Review testReview = setupReview();
-        assertEquals("Kim", testReview.getWrittenBy());
+        assertEquals("Kim", testReview.getAuthor());
     }
 
     @Test
     public void setWrittenBy() {
         Review testReview = setupReview();
-        testReview.setWrittenBy("Mike");
-        assertNotEquals("Kim", testReview.getWrittenBy());
+        testReview.setAuthor("Mike");
+        assertNotEquals("Kim", testReview.getAuthor());
     }
 
     @Test
@@ -58,14 +58,14 @@ public class ReviewTest {
     @Test
     public void getTourId() {
         Review testReview = setupReview();
-        assertEquals(0, testReview.getTourId());
+        assertEquals(0, testReview.getKidId());
     }
 
     @Test
     public void setTourId() {
         Review testReview = setupReview();
-        testReview.setTourId(10);
-        assertNotEquals(1, testReview.getTourId());
+        testReview.setKidId(10);
+        assertNotEquals(1, testReview.getKidId());
     }
 
     @Test
@@ -77,6 +77,6 @@ public class ReviewTest {
 
     // helper
     public Review setupReview (){
-        return new Review("Great service", "Kim",4, 0,0, '0', "");
+        return new Review("Great service", "Kim",4, 0,0, '0', '0');
     }
 }
