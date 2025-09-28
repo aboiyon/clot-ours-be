@@ -37,7 +37,7 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, dbUser, dbPassword);
 
 
-        enableCORS("*", "POST,GET", "");
+        enableCORS();
 
         Sql2oProductDao productDao = new Sql2oProductDao(sql2o);
         ProductController productController = new ProductController(productDao);
@@ -361,14 +361,14 @@ public class App {
             res.body(gson.toJson(jsonMap));
         });
 
-        after((req, res) ->{
+        after((req, res) -> {
             res.type("application/json");
         });
 
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
-    private static void enableCORS(final String origin, final String methods, final String headers) {
+    private static void enableCORS() {
 
         options("/*", (request, response) -> {
 
@@ -386,10 +386,9 @@ public class App {
         });
 
         before((request, response) -> {
-            response.header("Access-Control-Allow-Origin", origin);
-            response.header("Access-Control-Request-Method", methods);
-            response.header("Access-Control-Allow-Headers", headers);
-            // Note: this may or may not be necessary in your particular application
+            response.header("Access-Control-Allow-Origin", "http://localhost:4567");
+            response.header("Access-Control-Request-Method", "POST,GET,UPDATE,DELETE");
+            response.header("Access-Control-Allow-Headers", "");
             response.type("application/json");
         });
     }
