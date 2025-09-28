@@ -166,7 +166,7 @@ public class App {
         get("/men", "application/json", (req, res) -> {
             System.out.println(manHelper.getAll());
 
-            if(manHelper.getAll().size() > 0){
+            if(!manHelper.getAll().isEmpty()){
                 return gson.toJson(manHelper.getAll());
             }
 
