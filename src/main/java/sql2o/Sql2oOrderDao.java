@@ -19,13 +19,13 @@ public class Sql2oOrderDao implements OrderDao {
     }
     @Override
     public void add(Order order) {
-        String sql = "INSERT INTO orders (name, age, birthday) VALUES (:name, :age, :now())";
+        String sql = "INSERT INTO orders (id, name, age, birthday) VALUES (:id, :name, :age, :now())";
         try (Connection connection = sql2o.open()){
             int id = (int) connection.createQuery(sql, true)
                     .bind(order)
                     .executeUpdate()
                     .getKey();
-            order.setmId(id);
+            order.setId(id);
         } catch (Sql2oException ex) {
             log.error("e: ", ex);
         }
