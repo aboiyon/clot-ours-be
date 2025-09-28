@@ -1,6 +1,5 @@
 package com.nelel.clothing.models.product;
 
-import com.nelel.clothing.enums.InventoryStatus;
 import com.nelel.clothing.enums.ProductCategory;
 import com.nelel.clothing.exceptions.InsufficientStockException;
 
@@ -185,18 +184,18 @@ public class Product {
     /**
      * Get inventory status for display
      */
-    public InventoryStatus getInventoryStatus() {
-        if (!trackInventory) {
-            return InventoryStatus.UNLIMITED;
-        }
-        if (isOutOfStock()) {
-            return allowBackorders ? InventoryStatus.BACKORDER : InventoryStatus.OUT_OF_STOCK;
-        }
-        if (isLowStock()) {
-            return InventoryStatus.LOW_STOCK;
-        }
-        return InventoryStatus.IN_STOCK;
-    }
+//    public InventoryStatus getInventoryStatus() {
+//        if (!trackInventory) {
+//            return InventoryStatus.UNLIMITED;
+//        }
+//        if (isOutOfStock()) {
+//            return allowBackorders ? InventoryStatus.BACKORDER : InventoryStatus.OUT_OF_STOCK;
+//        }
+//        if (isLowStock()) {
+//            return InventoryStatus.LOW_STOCK;
+//        }
+//        return InventoryStatus.IN_STOCK;
+//    }
 
     /**
      * Calculate discount percentage if compare at price is set
@@ -329,7 +328,7 @@ public class Product {
                 ", category=" + category +
                 ", price=" + price +
                 ", available=" + getAvailableQuantity() +
-                ", status=" + getInventoryStatus() +
+//                ", status=" + getInventoryStatus() +
                 '}';
     }
 
