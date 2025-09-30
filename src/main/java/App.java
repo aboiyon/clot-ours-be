@@ -94,6 +94,33 @@ public class App {
             }
         });
 
+        get("/orders/:id", "application/json", (req, res) ->{
+            int id = Integer.parseInt(req.params("id"));
+            Order order = orderDao.findById(id);
+            if (order == null){
+                res.status(404);
+                return "{\"message\":\"Order not found\"}";
+            }
+            res.type("application/json");
+            res.status(200);
+            return gson.toJson(order);
+        });
+
+        put("/orders/:id", "application/json", (req, res) ->{
+            int id = Integer.parseInt(req.params("id"));
+            Order order = gson.fromJson(req.body(), Order.class);
+            orderDao.update(id, order.getName(), order.getAge(), order.getBirthday());
+            res.status(200);
+            return gson.toJson(orderDao.findById(id));
+        });
+
+        delete("/orders/:id", "application/json", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            orderDao.deleteById(id);
+            res.status(204);
+            return "";
+        });
+
         post("/kids/new", "application/json", (req, res) -> {
             Kid kid = gson.fromJson(req.body(), Kid.class);
             kidHelper.add(kid);
