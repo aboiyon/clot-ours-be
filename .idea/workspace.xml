@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="update build artifacts">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/config/ConfigLoader.java" afterDir="false" />
+    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="add sql2o connection">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql2o/Sql2oOrderDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,13 +65,25 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2V1HF5wH6yGgbtoJulMQQTLau3M" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "order"
+    "Gradle.Download Sources.executor": "Run",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "auth",
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -265,7 +281,31 @@
       <option name="project" value="LOCAL" />
       <updated>1759084449156</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="rename order members">
+      <option name="closed" value="true" />
+      <created>1759093159754</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1759093159754</updated>
+    </task>
+    <task id="LOCAL-00008" summary="rename order members">
+      <option name="closed" value="true" />
+      <created>1759093174048</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759093174048</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add sql2o connection">
+      <option name="closed" value="true" />
+      <created>1759093203745</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1759093203745</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -289,6 +329,8 @@
     <MESSAGE value="refactor: use slf4j logger" />
     <MESSAGE value="comment out inventory method for status display" />
     <MESSAGE value="update build artifacts" />
-    <option name="LAST_COMMIT_MESSAGE" value="update build artifacts" />
+    <MESSAGE value="rename order members" />
+    <MESSAGE value="add sql2o connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sql2o connection" />
   </component>
 </project>
