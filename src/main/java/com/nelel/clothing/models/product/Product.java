@@ -5,126 +5,97 @@ import com.nelel.clothing.exceptions.InsufficientStockException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Product {
-    private int id;
-    private String name;
+
+    private final int id;
+    private final String sku;
+    private final String name;
+    private final ProductCategory category;
+    private final Instant createdAt;
+
     private String description;
     private String imageUrl;
     private BigDecimal price;
     private String color;
-    private ProductCategory category;
     private String brand;
     private String size;
     private String material;
-    private boolean isActive;
+    private boolean active;
 
-    // === INVENTORY MANAGEMENT ===
-    private int stockQuantity;          // Total physical inventory
-    private int reservedQuantity;       // Stock held in pending orders/carts
-    private int minimumStockLevel;      // Reorder threshold
-    private boolean trackInventory;     // Some products might not need tracking (digital goods)
-    private int maxOrderQuantity;       // Max quantity per order (prevent bulk buying)
+    // Inventory
+    private int stockQuantity;
+    private int reservedQuantity;
+    private int minimumStockLevel;
+    private boolean trackInventory;
+    private int maxOrderQuantity;
+    private boolean allowBackorders;
+    private int backorderLimit;
 
-    // === E-COMMERCE FEATURES ===
-    private BigDecimal compareAtPrice;  // Original price for "was $X, now $Y"
-    private boolean isFeatured;         // Show on homepage
-    private boolean allowBackorders;    // Accept orders when out of stock
-    private int backorderLimit;         // Max backorders allowed
-    private String sku;                 // Stock Keeping Unit - unique identifier
-    private BigDecimal weight;              // For shipping calculations
-    private String tags;                // Comma-separated tags for search/filtering
+    // E-commerce
+    private BigDecimal compareAtPrice;
+    private boolean featured;
+    private BigDecimal weight;
+    private Set<String> tags;
 
-    // === TIMESTAMPS ===
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Instant updatedAt;
 
-    // === CONSTRUCTORS ===
-    public Product() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        this.isActive = true;
+    // === CONSTRUCTOR ===
+    public Product(int id, String sku, String name, BigDecimal price, ProductCategory category) {
+        this.id = id;
+        this.sku = Objects.requireNonNull(sku, "SKU must not be null");
+        this.name = Objects.requireNonNull(name, "Name must not be null");
+        this.price = validatePrice(price);
+        this.category = Objects.requireNonNull(category, "Category must not be null");
+        this.createdAt = Instant.now();
+        this.updatedAt = this.createdAt;
+        this.active = true;
         this.trackInventory = true;
         this.minimumStockLevel = 5;
         this.maxOrderQuantity = 10;
         this.allowBackorders = false;
         this.backorderLimit = 0;
+        this.weight = BigDecimal.ZERO;
+        this.tags = new HashSet<>();
     }
 
-    public Product(String name, String description, BigDecimal price, ProductCategory category, String review) {
-        this();
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category = category;
+// === INVENTORY BUSINESS LOGIC ===
+
+    private void touchUpdatedAt() {
+        this.updatedAt = Instant.now();
     }
 
-    // === INVENTORY BUSINESS LOGIC ===
-
-    /**
-     * Get quantity available for purchase (not reserved)
-     */
     public int getAvailableQuantity() {
-        if (!trackInventory) {
-            return Integer.MAX_VALUE; // Digital products, unlimited
-        }
-        return Math.max(0, stockQuantity - reservedQuantity);
+        return trackInventory ? Math.max(0, stockQuantity - reservedQuantity) : Integer.MAX_VALUE;
     }
 
-    /**
-     * Total quantity including backorders if allowed
-     */
     public int getTotalAvailableQuantity() {
         int available = getAvailableQuantity();
-        if (allowBackorders && available == 0) {
-            return Math.max(0, backorderLimit);
-        }
-        return available;
+        return allowBackorders ? available + backorderLimit : available;
     }
 
-    /**
-     * Check if product is currently in stock
-     */
     public boolean isInStock() {
         return !trackInventory || getAvailableQuantity() > 0 || (allowBackorders && backorderLimit > 0);
     }
 
-    /**
-     * Check if inventory is running low
-     */
     public boolean isLowStock() {
         return trackInventory && stockQuantity <= minimumStockLevel && stockQuantity > 0;
     }
 
-    /**
-     * Check if product is completely out of stock
-     */
     public boolean isOutOfStock() {
         return trackInventory && getAvailableQuantity() == 0 && (!allowBackorders || backorderLimit == 0);
     }
 
-    /**
-     * Check if requested quantity can be fulfilled
-     */
     public boolean canFulfill(int requestedQuantity) {
-        if (!isActive) {
-            return false;
-        }
-        if (!trackInventory) {
-            return requestedQuantity <= maxOrderQuantity;
-        }
-        if (requestedQuantity > maxOrderQuantity) {
-            return false;
-        }
+        if (!active) return false;
+        if (requestedQuantity > maxOrderQuantity) return false;
         return getTotalAvailableQuantity() >= requestedQuantity;
     }
 
-    /**
-     * Reserve stock for a pending order/cart
-     * @param quantity Amount to reserve
-     * @throws InsufficientStockException if not enough stock available
-     */
     public void reserveStock(int quantity) {
         if (!canFulfill(quantity)) {
             throw new InsufficientStockException(
@@ -132,221 +103,108 @@ public class Product {
                             quantity, name, getTotalAvailableQuantity())
             );
         }
-
         if (trackInventory) {
-            this.reservedQuantity += quantity;
-            this.updatedAt = LocalDateTime.now();
+            reservedQuantity += quantity;
+            touchUpdatedAt();
         }
     }
 
-    /**
-     * Release previously reserved stock (cart abandonment, order cancellation)
-     */
     public void releaseReservedStock(int quantity) {
         if (trackInventory) {
-            this.reservedQuantity = Math.max(0, this.reservedQuantity - quantity);
-            this.updatedAt = LocalDateTime.now();
+            reservedQuantity = Math.max(0, reservedQuantity - quantity);
+            touchUpdatedAt();
         }
     }
 
-    /**
-     * Fulfill an order - remove from both stock and reserved
-     */
     public void fulfillOrder(int quantity) {
         if (trackInventory) {
-            this.stockQuantity = Math.max(0, this.stockQuantity - quantity);
-            this.reservedQuantity = Math.max(0, this.reservedQuantity - quantity);
-            this.updatedAt = LocalDateTime.now();
+            // assume reserved stock first, then physical stock
+            reservedQuantity = Math.max(0, reservedQuantity - quantity);
+            stockQuantity = Math.max(0, stockQuantity - quantity);
+            touchUpdatedAt();
         }
     }
 
-    /**
-     * Add stock (receiving inventory)
-     */
     public void addStock(int quantity) {
         if (trackInventory && quantity > 0) {
-            this.stockQuantity += quantity;
-            this.updatedAt = LocalDateTime.now();
+            stockQuantity += quantity;
+            touchUpdatedAt();
         }
     }
 
-    /**
-     * Remove stock (damage, theft, etc.)
-     */
     public void removeStock(int quantity, String reason) {
         if (trackInventory && quantity > 0) {
-            this.stockQuantity = Math.max(0, this.stockQuantity - quantity);
-            this.updatedAt = LocalDateTime.now();
-            // TODO: Log inventory adjustment with reason
+            stockQuantity = Math.max(0, stockQuantity - quantity);
+            touchUpdatedAt();
+            // TODO: persist inventory adjustment log with reason
         }
     }
 
-    /**
-     * Get inventory status for display
-     */
-//    public InventoryStatus getInventoryStatus() {
-//        if (!trackInventory) {
-//            return InventoryStatus.UNLIMITED;
-//        }
-//        if (isOutOfStock()) {
-//            return allowBackorders ? InventoryStatus.BACKORDER : InventoryStatus.OUT_OF_STOCK;
-//        }
-//        if (isLowStock()) {
-//            return InventoryStatus.LOW_STOCK;
-//        }
-//        return InventoryStatus.IN_STOCK;
-//    }
-
-    /**
-     * Calculate discount percentage if compare at price is set
-     */
+    // === PRICING ===
     public BigDecimal getDiscountPercentage() {
         if (compareAtPrice != null && compareAtPrice.compareTo(price) > 0) {
             BigDecimal discount = compareAtPrice.subtract(price);
             return discount.divide(compareAtPrice, 2, RoundingMode.HALF_UP)
-                    .multiply(new BigDecimal("100"));
+                    .multiply(BigDecimal.valueOf(100));
         }
         return BigDecimal.ZERO;
     }
 
-    /**
-     * Check if product is on sale
-     */
     public boolean isOnSale() {
         return compareAtPrice != null && compareAtPrice.compareTo(price) > 0;
     }
 
-    // === STANDARD GETTERS AND SETTERS ===
+    // === VALIDATION HELPERS ===
+    private BigDecimal validatePrice(BigDecimal value) {
+        Objects.requireNonNull(value, "Price must not be null");
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        return value;
+    }
+
+    // === GETTERS (SETTERS only where mutation is needed) ===
     public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
+    public String getSku() { return sku; }
     public String getName() { return name; }
-    public void setName(String name) {
-        this.name = name;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) {
-        this.description = description;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-
+    public ProductCategory getCategory() { return category; }
+    public Instant getCreatedAt() { return createdAt; }
+    public Instant getUpdatedAt() { return updatedAt; }
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) {
-        this.price = price;
-        this.updatedAt = LocalDateTime.now();
+        this.price = validatePrice(price);
+        touchUpdatedAt();
     }
 
-    public String getColor() { return color; }
-    public void setColor(String color) { this.color = color; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; touchUpdatedAt(); }
 
-    public ProductCategory getCategory() { return category; }
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-        this.updatedAt = LocalDateTime.now();
+    public Set<String> getTags() { return tags; }
+    public void setTags(Set<String> tags) { this.tags = new HashSet<>(tags); }
+
+    // === EQUALITY ===
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return sku.equals(product.sku);
     }
 
-    public String getBrand() { return brand; }
-    public void setBrand(String brand) { this.brand = brand; }
-
-    public String getSize() { return size; }
-    public void setSize(String size) { this.size = size; }
-
-    public String getMaterial() { return material; }
-    public void setMaterial(String material) { this.material = material; }
-
-    public boolean isActive() { return isActive; }
-    public void setActive(boolean active) {
-        isActive = active;
-        this.updatedAt = LocalDateTime.now();
+    @Override
+    public int hashCode() {
+        return Objects.hash(sku);
     }
-
-    // === INVENTORY GETTERS/SETTERS ===
-    public int getStockQuantity() { return stockQuantity; }
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = Math.max(0, stockQuantity);
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public int getReservedQuantity() { return reservedQuantity; }
-    public void setReservedQuantity(int reservedQuantity) {
-        this.reservedQuantity = Math.max(0, reservedQuantity);
-    }
-
-    public int getMinimumStockLevel() { return minimumStockLevel; }
-    public void setMinimumStockLevel(int minimumStockLevel) {
-        this.minimumStockLevel = Math.max(0, minimumStockLevel);
-    }
-
-    public boolean isTrackInventory() { return trackInventory; }
-    public void setTrackInventory(boolean trackInventory) { this.trackInventory = trackInventory; }
-
-    public int getMaxOrderQuantity() { return maxOrderQuantity; }
-    public void setMaxOrderQuantity(int maxOrderQuantity) {
-        this.maxOrderQuantity = Math.max(1, maxOrderQuantity);
-    }
-
-    public BigDecimal getCompareAtPrice() { return compareAtPrice; }
-    public void setCompareAtPrice(BigDecimal compareAtPrice) { this.compareAtPrice = compareAtPrice; }
-
-    public boolean isFeatured() { return isFeatured; }
-    public void setFeatured(boolean featured) { isFeatured = featured; }
-
-    public boolean isAllowBackorders() { return allowBackorders; }
-    public void setAllowBackorders(boolean allowBackorders) { this.allowBackorders = allowBackorders; }
-
-    public int getBackorderLimit() { return backorderLimit; }
-    public void setBackorderLimit(int backorderLimit) {
-        this.backorderLimit = Math.max(0, backorderLimit);
-    }
-
-    public String getSku() { return sku; }
-    public void setSku(String sku) { this.sku = sku; }
-
-    public BigDecimal getWeight() { return weight; }
-    public void setWeight(BigDecimal weight) { this.weight = (weight != null) ? weight : BigDecimal.ZERO; }
-
-    public String getTags() { return tags; }
-    public void setTags(String tags) { this.tags = tags; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", sku='" + sku + '\'' +
-                ", category=" + category +
+                ", name='" + name + '\'' +
                 ", price=" + price +
-                ", available=" + getAvailableQuantity() +
-//                ", status=" + getInventoryStatus() +
+                ", stock=" + stockQuantity +
+                ", reserved=" + reservedQuantity +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        // Compare by id if both products are persisted, otherwise use sku
-        if (id != 0 && product.id != 0) {
-            return id == product.id;
-        }
-        return sku != null && sku.equals(product.sku);
-    }
-
-    @Override
-    public int hashCode() {
-        // Use id if available, otherwise use sku
-        return id != 0 ? id : (sku != null ? sku.hashCode() : 0);
-    }
 }
