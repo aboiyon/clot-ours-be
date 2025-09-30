@@ -2,6 +2,7 @@ package com.nelel.clothing.sql2o;
 
 import com.nelel.clothing.dao.ProductDao;
 import com.nelel.clothing.models.product.Product;
+import com.nelel.clothing.services.InventoryService;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -14,6 +15,7 @@ public class Sql2oProductDao implements ProductDao {
     public Sql2oProductDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
+    public InventoryService inventoryService;
 
     @Override
     public void add(Product product) {
@@ -22,7 +24,7 @@ public class Sql2oProductDao implements ProductDao {
                 "compareAtPrice, isFeatured, allowBackorders, backorderLimit, sku, weight, tags, createdAt, updatedAt) " +
                 "VALUES (:name, :description, :imageUrl, :price, :color, :category, :brand, :size, :material, :isActive, " +
                 ":stockQuantity, :reservedQuantity, :minimumStockLevel, :trackInventory, :maxOrderQuantity, :compareAtPrice, " +
-                ":isFeatured, :allowBackorders, :backorderLimit, :sku, :weight, :tags, :createdAt, :updatedAt)";
+                ":isFeatured, :allowBackorders, :backorderLimit, :sku, :weight, :tags, now(), now()";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(product)
@@ -118,7 +120,8 @@ public class Sql2oProductDao implements ProductDao {
         if (product == null) {
             throw new RuntimeException("Product with ID " + productId + " not found");
         }
-        product.reserveStock(quantity);
+//        product.reserveStock(quantity);
+        this.inventoryService.reserveStock(product, quantity);
         update(product);
     }
 
@@ -128,7 +131,8 @@ public class Sql2oProductDao implements ProductDao {
         if (product == null) {
             throw new RuntimeException("Product with ID " + productId + " not found");
         }
-        product.releaseReservedStock(quantity);
+//        product.releaseReservedStock(quantity);
+        this.inventoryService.releaseReservedStock(product, quantity);
         update(product);
     }
 
@@ -138,7 +142,8 @@ public class Sql2oProductDao implements ProductDao {
         if (product == null) {
             throw new RuntimeException("Product with ID " + productId + " not found");
         }
-        product.fulfillOrder(quantity);
+//        product.fulfillOrder(quantity);
+        this.inventoryService.fulfillOrder(product, quantity);
         update(product);
     }
 
@@ -148,17 +153,19 @@ public class Sql2oProductDao implements ProductDao {
         if (product == null) {
             throw new RuntimeException("Product with ID " + productId + " not found");
         }
-        product.addStock(quantity);
+//        product.addStock(quantity);
+        this.inventoryService.addStock(product,quantity);
         update(product);
     }
 
     // remove stock
-    public void removeStock(int productId, int quantity, String reason) {
+    public void removeStock(int productId, int quantity) {
         Product product = findById(productId);
         if (product == null) {
             throw new RuntimeException("Product with ID " + productId + " not found");
         }
-        product.removeStock(quantity, reason);
+//        product.removeStock(quantity, reason);
+        this.inventoryService.removeStock(product, quantity);
         update(product);
     }
 }

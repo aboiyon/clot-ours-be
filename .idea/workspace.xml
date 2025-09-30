@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="refactor: improve immutability, use Instant time, add validation to prevent negative price/nulls, use tags instead of coma-separated string">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c330abfb-4721-410c-90b6-4e9f0ea85bb2" name="Default Changelist" comment="refactor: extract the inventory operations into a separate InentoryService">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/services/InventoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/models/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/models/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/sql2o/Sql2oProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nelel/clothing/sql2o/Sql2oProductDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759259741645</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="refactor: extract the inventory operations into a separate InentoryService">
+      <option name="closed" value="true" />
+      <created>1759259998443</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1759259998443</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -371,6 +380,7 @@
     <MESSAGE value="fix: send the correct values to db" />
     <MESSAGE value="add qodana workflow" />
     <MESSAGE value="refactor: improve immutability, use Instant time, add validation to prevent negative price/nulls, use tags instead of coma-separated string" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: improve immutability, use Instant time, add validation to prevent negative price/nulls, use tags instead of coma-separated string" />
+    <MESSAGE value="refactor: extract the inventory operations into a separate InentoryService" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: extract the inventory operations into a separate InentoryService" />
   </component>
 </project>
