@@ -4,59 +4,59 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Order {
-    int mId;
-    String mName;
-    int mAge;
-    Timestamp mBirthday;
+    int id;
+    String name;
+    int age;
+    Timestamp birthday;
 
-    public Order(int mId, String mName, int mAge, Timestamp mBirthday) {
-        this.mId = mId;
-        this.mName = mName;
-        this.mAge = mAge;
-        this.mBirthday = mBirthday;
+    public Order(int id, String name, int age, Timestamp birthday) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.birthday = birthday;
     }
 
-    public int getmId() {
-        return mId;
+    public int getId() {
+        return id;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getmAge() {
-        return mAge;
+    public int getAge() {
+        return age;
     }
 
-    public void setmAge(int mAge) {
-        this.mAge = mAge;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public Timestamp getmBirthday() {
-        return mBirthday;
+    public Timestamp getBirthday() {
+        return birthday;
     }
 
-    public void setmBirthday(Timestamp mBirthday) {
-        this.mBirthday = mBirthday;
+    public void setBirthday(Timestamp birthday) {
+        this.birthday = birthday;
     }
 
-    public String getmName() {
-        return mName;
+    public String getName() {
+        return name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return getmId() == order.getmId() && getmAge() == order.getmAge() && Objects.equals(getmName(), order.getmName()) && Objects.equals(getmBirthday(), order.getmBirthday());
+        return getId() == order.getId() && getAge() == order.getAge() && Objects.equals(getName(), order.getName()) && Objects.equals(getBirthday(), order.getBirthday());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getmId(), getmName(), getmAge(), getmBirthday());
+        return Objects.hash(getId(), getName(), getAge(), getBirthday());
     }
 }

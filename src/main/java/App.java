@@ -4,6 +4,7 @@ import com.nelel.clothing.controllers.product.ProductController;
 import com.nelel.clothing.sql2o.Sql2oProductDao;
 import exceptions.ApiException;
 import models.*;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import sql2o.*;
 
@@ -22,6 +23,7 @@ public class App {
         DesignerHelper designerHelper;
         Sql2oOrderDao orderDao;
         Gson gson = new Gson();
+        Connection connection;
         port(4567);
 
         staticFileLocation("/public");
@@ -50,6 +52,7 @@ public class App {
         womanHelper = new WomanHelper(sql2o);
         designerHelper = new DesignerHelper(sql2o);
         orderDao = new Sql2oOrderDao(sql2o);
+        connection = sql2o.open();
 
 
         path("/api", () -> {
@@ -89,6 +92,33 @@ public class App {
             else {
                 return "{\"message\":\"I'm sorry, but no orders are currently listed in the database.\"}";
             }
+        });
+
+        get("/orders/:id", "application/json", (req, res) ->{
+            int id = Integer.parseInt(req.params("id"));
+            Order order = orderDao.findById(id);
+            if (order == null){
+                res.status(404);
+                return "{\"message\":\"Order not found\"}";
+            }
+            res.type("application/json");
+            res.status(200);
+            return gson.toJson(order);
+        });
+
+        put("/orders/:id", "application/json", (req, res) ->{
+            int id = Integer.parseInt(req.params("id"));
+            Order order = gson.fromJson(req.body(), Order.class);
+            orderDao.update(id, order.getName(), order.getAge(), order.getBirthday());
+            res.status(200);
+            return gson.toJson(orderDao.findById(id));
+        });
+
+        delete("/orders/:id", "application/json", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            orderDao.deleteById(id);
+            res.status(204);
+            return "";
         });
 
         post("/kids/new", "application/json", (req, res) -> {
