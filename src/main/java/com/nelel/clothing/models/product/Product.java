@@ -9,37 +9,37 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Product {
-    private final int id;
-    private final String sku;
-    private final String name;
-    private final ProductCategory category;
-    private final Instant createdAt;
+    public final int id;
+    public final String sku;
+    public final String name;
+    public final ProductCategory category;
+    public final Instant createdAt;
 
-    private String description;
-    private String imageUrl;
-    private BigDecimal price;
-    private String color;
+    public String description;
+    public String imageUrl;
+    public BigDecimal price;
+    public String color;
     private String brand;
-    private String size;
-    private String material;
-    private boolean active;
+    public String size;
+    public String material;
+    public boolean active;
 
     // Inventory (data only)
-    int stockQuantity;
-    int reservedQuantity;
+    public int stockQuantity;
+    public int reservedQuantity;
     int minimumStockLevel;
-    boolean trackInventory;
-    int maxOrderQuantity;
-    boolean allowBackorders;
-    int backorderLimit;
+    public boolean trackInventory;
+    public int maxOrderQuantity;
+    public boolean allowBackorders;
+    public int backorderLimit;
 
     // E-commerce
-    private BigDecimal compareAtPrice;
-    private boolean featured;
-    private BigDecimal weight;
-    private Set<String> tags;
+    public BigDecimal compareAtPrice;
+    public boolean featured;
+    public BigDecimal weight;
+    public Set<String> tags;
 
-    private Instant updatedAt;
+    public Instant updatedAt;
 
     public Product(int id, String sku, String name, BigDecimal price, ProductCategory category) {
         this.id = id;
@@ -108,4 +108,7 @@ public class Product {
                 '}';
     }
 
+    public void setId(int id) {
+
+    }
 }
