@@ -48,20 +48,20 @@ public class Sql2oOrderDao implements OrderDao {
         }
     }
 
-    @Override
-    public void update(int id, String name, int age, Timestamp birthday) {
-        String sql = "UPDATE orders SET (name, age, birthday) = (:name, :age, now()) WHERE id = :id";
-        try (Connection connection = sql2o.open()){
-            connection.createQuery(sql)
-                    .addParameter("id", id)
-                    .addParameter("name", name)
-                    .addParameter("age", age)
-                    .addParameter("birthday", birthday)
-                    .executeUpdate();
-        } catch (Sql2oException ex) {
-            log.error("e: ", ex);
-        }
+@Override
+public void update(int id, String name, int age, Timestamp birthday) {
+    String sql = "UPDATE orders SET name = :name, age = :age, birthday = now() WHERE id = :id";
+    try (Connection connection = sql2o.open()){
+        connection.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", name)
+                .addParameter("age", age)
+                .executeUpdate();
+    } catch (Sql2oException ex) {
+        log.error("e: ", ex);
     }
+}
+
 
     @Override
     public void deleteAll() {
